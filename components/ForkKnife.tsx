@@ -7,7 +7,7 @@ interface ForkKnifeProps {
 
 export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
   return (
-    <button className={className} style={{ all: "unset", cursor: "pointer" }}>
+    
       <motion.svg
         width="80"
         height="80"
@@ -18,7 +18,7 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
      
       >
-        {/* Top part */}
+        
         <motion.g
           animate={open ? { rotate: 40, x: 4, y: 2 } : { rotate: 0, x: 0, y: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 10 }}
@@ -30,7 +30,7 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
           />
         </motion.g>
 
-        {/* Bottom part */}
+       
         <motion.g
           animate={open ? { rotate: -40, x: -4, y: 2 } : { rotate: 0, x: 0, y: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 10 }}
@@ -42,6 +42,6 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
           />
         </motion.g>
       </motion.svg>
-    </button>
+    
   );
 };

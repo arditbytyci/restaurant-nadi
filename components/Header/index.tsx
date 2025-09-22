@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useLayoutEffect } from "react";
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
 import { ForkKnife } from "../ForkKnife";
 import { motion, useTransform, useMotionValue } from "framer-motion";
@@ -18,54 +18,48 @@ export const Header: React.FC<HeaderProps> = ({ className = "", scrollY }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const lenis = useScroll();
 
-  // Toggle modal
-  const handleToggle = () => {
-    setModalOpen(prev => !prev);
-  };
+  const toggleModal = () => setModalOpen(prev => !prev);
 
-  // Freeze scroll when modal is open
-  React.useEffect(() => {
-    if (modalOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
+  useEffect(() => {
+    modalOpen ? lenis.stop() : lenis.start();
     return () => lenis.start();
   }, [modalOpen, lenis]);
 
-  // Capture header height
   useLayoutEffect(() => {
     if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
   }, []);
 
-  // Motion scroll
   const motionScroll = useMotionValue(scrollY);
-  React.useEffect(() => motionScroll.set(scrollY), [scrollY, motionScroll]);
+  useEffect(() => motionScroll.set(scrollY), [scrollY]);
   const y = useTransform(motionScroll, [0, 200], [0, -150]);
   const opacity = useTransform(motionScroll, [0, 200], [1, 0]);
 
   return (
     <>
-      <motion.header
-        ref={headerRef}
-        style={{ y, opacity }}
-        className={`fixed top-0 left-0 z-50 flex w-full justify-between items-center px-8 py-4  ${className}`}
-      >
-        <Image src="/logo.png" width={300} height={150} alt="Logo" priority />
-        <button
-          onClick={handleToggle}
-          aria-expanded={modalOpen}
-          aria-label="Toggle menu"
-        >
-          <ForkKnife open={modalOpen} />
-        </button>
-      </motion.header>
+     <motion.header
+  ref={headerRef}
+  style={{ y, opacity }}
+  className={`fixed top-0 left-0 z-50 flex w-full justify-between items-center 
+              px-4 py-3 md:px-8 md:py-4 ${className}`}
+>
+  <Image
+    src="/logo.png"
+    width={modalOpen ? 200 : 300} 
+    height={modalOpen ? 100 : 150}
+    alt="Logo"
+    priority
+  />
+  <button
+    onClick={toggleModal}
+    aria-expanded={modalOpen}
+    aria-label="Toggle menu"
+    className="w-12 h-12 md:w-14 md:h-14"
+  >
+    <ForkKnife open={modalOpen} />
+  </button>
+</motion.header>
 
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        topOffset={headerHeight}
-      />
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} topOffset={headerHeight} />
     </>
   );
 };

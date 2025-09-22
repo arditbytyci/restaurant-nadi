@@ -1,6 +1,5 @@
 "use client";
 
-import { ClientLayout } from "@/components/ClientLayout";
 import { Hero } from "@/components/Hero";
 import { FavoriteDishes } from "@/components/FavoriteDishes";
 

@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
         <ClientLayout>
-          {children} {/* only page content, header handled in ClientLayout */}
+          {children} 
         </ClientLayout>
       </body>
     </html>

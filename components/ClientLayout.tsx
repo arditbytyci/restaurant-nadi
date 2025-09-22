@@ -16,7 +16,7 @@ export const ClientLayout = ({ children }: ClientLayoutProps) => {
   );
 };
 
-// Tracks Lenis scroll and passes it to Header
+
 const ScrollWatcher = ({ children }: { children: ReactNode }) => {
   const lenis = useScroll();
   const [scrollY, setScrollY] = useState(0);
@@ -36,7 +36,7 @@ const ScrollWatcher = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      <Header scrollY={scrollY} /> {/* ONLY ONE HEADER */}
+      <Header scrollY={scrollY} /> 
       {children}
     </>
   );

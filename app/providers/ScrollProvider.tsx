@@ -22,7 +22,7 @@ export const ScrollProvider = ({ children }: { children: ReactNode }) => {
     return () => lenis.destroy();
   }, []);
 
-  // Wait until Lenis is ready before rendering children
+  
   if (!isReady) return null;
 
   return <ScrollContext.Provider value={lenisRef.current}>{children}</ScrollContext.Provider>;

@@ -5,7 +5,7 @@ import { FavoriteDishes } from "@/components/FavoriteDishes";
 import {motion, useMotionValueEvent, useScroll, useSpring, useTransform} from 'framer-motion'
 import { useRef } from "react";
 import test from "node:test";
-import { ClientLayout } from "@/ClientLayout";
+
 
 export default function Home() {
 

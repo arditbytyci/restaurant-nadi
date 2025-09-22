@@ -8,20 +8,20 @@ interface ForkKnifeProps {
 export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
   return (
     
-      <motion.svg
+      <svg
         width="80"
         height="80"
         viewBox="0 0 100 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+     
      
       >
         
         <motion.g
           animate={open ? { rotate: 40, x: 4, y: 2 } : { rotate: 0, x: 0, y: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 10 }}
+          transition={{ type: "spring", stiffness: 100, damping: 10 }}
           style={{ originX: 0.5, originY: 0.5 }}
         >
           <path
@@ -33,7 +33,7 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
        
         <motion.g
           animate={open ? { rotate: -40, x: -4, y: 2 } : { rotate: 0, x: 0, y: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 10 }}
+          transition={{ type: "spring", stiffness: 100, damping: 10 }}
           style={{ originX: 0.5, originY: 0.5}}
         >
           <path
@@ -41,7 +41,7 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({ open, className }) => {
             fill="#65171D"
           />
         </motion.g>
-      </motion.svg>
+      </svg>
     
   );
 };

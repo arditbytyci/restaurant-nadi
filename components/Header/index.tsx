@@ -2,33 +2,37 @@
 
 import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
-import { ForkKnife } from "../ForkKnife";
-import { motion, useTransform, useMotionValue } from "framer-motion";
-import { Modal } from "../Modal";
+import { motion, useTransform, AnimatePresence } from "framer-motion";
 import { useLenis, useLenisScroll } from "@/app/providers/LenisProvider";
-
+import { ForkKnife } from "../ForkKnife";
+import Link from "next/link";
+import { MenuModal } from "./MenuModal";
 
 interface HeaderProps {
   className?: string;
- 
 }
+
+const links = [
+  { href: "/menu", label: "Menu" },
+  { href: "/about", label: "About" },
+  { href: "/", label: "Reservation" },
+  { href: "/", label: "Location" },
+];
 
 export const Header: React.FC<HeaderProps> = ({ className = "" }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Get Lenis scroll and instance
+  
   const scrollY = useLenisScroll();
   const lenis = useLenis();
 
-  // Stop scrolling when modal is open
-  useEffect(() => {
-    if (modalOpen) lenis?.stop();
-    else lenis?.start();
-  }, [modalOpen, lenis]);
+ 
+  const y = useTransform(scrollY, [0, headerHeight], [0, -headerHeight]);
+  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
 
-  // Measure header height
+  
   useLayoutEffect(() => {
     if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
     const handleResize = () => {
@@ -38,38 +42,54 @@ export const Header: React.FC<HeaderProps> = ({ className = "" }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Motion transforms
-  const y = useTransform(scrollY, [0, headerHeight], [0, -150]);
-  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
 
-  const toggleModal = () => setModalOpen(prev => !prev);
+useEffect(() => {
+  if (!lenis) return;
+
+  if (isMenuOpen) {
+    lenis.stop();
+    document.body.style.overflow = 'hidden'; // Stop Lenis smooth scrolling
+  } else {
+    lenis.start(); 
+    // Resume Lenis
+  }
+
+
+  const main = document.querySelector("[data-scroll-container]") as HTMLElement;
+  if (main) main.style.pointerEvents = isMenuOpen ? "none" : "auto";
+
+  return () => {
+    if (main) main.style.pointerEvents = "auto";
+    lenis.start();
+  };
+}, [isMenuOpen, lenis]);
+
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
     <>
-     <motion.header
-  ref={headerRef}
-  style={{ y, opacity }}
-  className={`fixed top-0 left-0 z-50 flex w-full justify-between items-center 
-              px-4 py-3 md:px-8 md:py-4 ${className}`}
->
-  <Image
-    src="/logo.png"
-    width={modalOpen ? 200 : 300} 
-    height={modalOpen ? 100 : 150}
-    alt="Logo"
-    priority
-  />
-  <button
-    onClick={toggleModal}
-    aria-expanded={modalOpen}
-    aria-label="Toggle menu"
-    className="w-12 h-12 md:w-14 md:h-14"
-  >
-    <ForkKnife open={modalOpen} />
-  </button>
-</motion.header>
+      {/* Header */}
+      <motion.header
+        ref={headerRef}
+        style={{ y, opacity }}
+        className={`fixed top-0 left-0 z-50 flex w-full justify-between items-center px-4 py-3 md:px-8 md:py-4 ${className}`}
+      >
+        <Image src="/logo.png" width={300} height={150} alt="Logo" priority />
+        <button
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+          className="w-12 h-12 md:w-14 md:h-14"
+        >
+          
+          <ForkKnife open={isMenuOpen} />
+        </button>
+      </motion.header>
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} topOffset={headerHeight} />
+     <MenuModal isOpen={isMenuOpen} headerHeight={headerHeight} onClose={() => setIsMenuOpen(false)} />
+
+
     </>
   );
 };

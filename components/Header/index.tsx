@@ -5,34 +5,44 @@ import Image from "next/image";
 import { ForkKnife } from "../ForkKnife";
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { Modal } from "../Modal";
-import { useScroll } from "@/app/providers/ScrollProvider";
+import { useLenis, useLenisScroll } from "@/app/providers/LenisProvider";
+
 
 interface HeaderProps {
   className?: string;
-  scrollY: number;
+ 
 }
 
-export const Header: React.FC<HeaderProps> = ({ className = "", scrollY }) => {
+export const Header: React.FC<HeaderProps> = ({ className = "" }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const lenis = useScroll();
 
-  const toggleModal = () => setModalOpen(prev => !prev);
+  // Get Lenis scroll and instance
+  const scrollY = useLenisScroll();
+  const lenis = useLenis();
 
+  // Stop scrolling when modal is open
   useEffect(() => {
-    modalOpen ? lenis.stop() : lenis.start();
-    return () => lenis.start();
+    if (modalOpen) lenis?.stop();
+    else lenis?.start();
   }, [modalOpen, lenis]);
 
+  // Measure header height
   useLayoutEffect(() => {
     if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+    const handleResize = () => {
+      if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const motionScroll = useMotionValue(scrollY);
-  useEffect(() => motionScroll.set(scrollY), [scrollY]);
-  const y = useTransform(motionScroll, [0, 200], [0, -150]);
-  const opacity = useTransform(motionScroll, [0, 200], [1, 0]);
+  // Motion transforms
+  const y = useTransform(scrollY, [0, headerHeight], [0, -150]);
+  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
+
+  const toggleModal = () => setModalOpen(prev => !prev);
 
   return (
     <>

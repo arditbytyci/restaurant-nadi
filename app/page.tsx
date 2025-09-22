@@ -5,10 +5,14 @@ import { FavoriteDishes } from "@/components/FavoriteDishes";
 import {motion, useMotionValueEvent, useScroll, useSpring, useTransform} from 'framer-motion'
 import { useRef } from "react";
 import test from "node:test";
+import { ClientLayout } from "@/ClientLayout";
 
 export default function Home() {
 
-  
+   const { scrollY } = useScroll();
+
+ 
+
 
 
   
@@ -16,13 +20,13 @@ export default function Home() {
 
   return (
         
-      <main data-scroll-container className="flex flex-col">
-        <section className="h-screen w-full">
+      <main data-scroll-container className="flex flex-col overflow-hidden">
+        <motion.section  className="h-screen w-full">
           <Hero />
-        </section>
-        <section className="h-screen w-full">
+        </motion.section>
+        <motion.section  className="h-screen w-full">
           <FavoriteDishes />
-        </section>
+        </motion.section>
       </main>
     
   );

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ClientProviders } from "./providers/ClientProviders";
-import { ClientLayout } from "@/components/ClientLayout";
+
+
+import { Header } from "@/components/Header";
+import { Providers } from "./providers/Providers";
 
 
 
@@ -21,9 +23,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
-        <ClientProviders>
-        <ClientLayout>{children} </ClientLayout>
-      </ClientProviders>
+        <Providers>
+        <Header />
+        <main className="">{children}</main> 
+      </Providers>
       </body>
     </html>
   );

@@ -1,38 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Container } from "../Container";
 
-interface HeroProps {
-  className?: string;
-}
-
-const arrow = ""
-
-export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
+export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
   return (
-    <div className={`relative flex flex-col w-full h-full  ${className}`}>
+    <div 
+      className={`grid grid-rows-2 ${className}`}
+      style={{ 
+        marginTop: 'var(--header-height, 0px)',
+        minHeight: 'calc(100dvh - var(--header-height, 0px))' // Use dvh for mobile safety
+      }}
+    >
       {/* Top Section */}
-      <section className="flex flex-col justify-end px-6 md:px-24 h-1/2">
-        <h1 className="text-3xl md:text-5xl uppercase text-[#65171D] tracking-wide">
+      <section className="flex items-end px-8 md:px-16">
+        <Container className="">
+        <h1 className="text-2xl md:text-5xl uppercase text-[#65171D] tracking-wide">
           Authentic Balkan Flavors, <span className="font-semibold line-clamp-1">Made with Love</span>
         </h1>
+        </Container>
       </section>
 
-      {/* Hero Image */}
-      <div className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2">
-    <Image src="/hero.png" width={450} height={450} alt="Plate" />
-  </div>
+      {/* Hero Image - positioned relative to the grid container */}
+      <div className="absolute top-1/2 left-[70%] transform -translate-x-1/2 -translate-y-1/2">
+        <Image src="/hero.png" width={450} height={450} alt="Plate" />
+      </div>
 
       {/* Bottom Section */}
-      <section className="flex flex-col justify-between bg-[#65171D] h-1/2 w-full  md:px-24  md:py-12 ">
+      <section className="bg-[#65171D] flex flex-col justify-between p-8 md:px-24 md:py-12">
+        <Container>
         <p className="text-[#FFEEDF] font-light text-lg md:text-2xl max-w-xl md:max-w-2xl">
-          Discover the rich taste of traditional Balkan cuisine, crafted with fresh ingredients and passion. From sizzling grilled meats to homemade specialties, every dish tells a story.
+          Discover the rich taste of traditional Balkan cuisine...
         </p>
-        <Link
-          href="/"
-          className="tracking-wider md:mt-8 text-lg md:text-2xl text-[#FFEEDF] font-light  px-6 py-3 md:px-8 md:py-4 w-fit mx-auto"
-        >
+        </Container>
+        <Link href="/" className="text-[#FFEEDF] font-light border border-[#FFEEDF] hover:bg-[#FFEEDF] hover:text-[#65171D] transition-colors w-fit mx-auto px-6 py-3">
           Book now 
         </Link>
+        
       </section>
     </div>
   );

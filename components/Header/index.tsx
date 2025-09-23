@@ -4,92 +4,88 @@ import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
 import { motion, useTransform, AnimatePresence } from "framer-motion";
 import { useLenis, useLenisScroll } from "@/app/providers/LenisProvider";
-import { ForkKnife } from "../ForkKnife";
-import Link from "next/link";
+
 import { MenuModal } from "./MenuModal";
+import { ForkKnife } from "../ForkKnife";
+import { Container } from "../Container";
 
-interface HeaderProps {
-  className?: string;
-}
-
-const links = [
-  { href: "/menu", label: "Menu" },
-  { href: "/about", label: "About" },
-  { href: "/", label: "Reservation" },
-  { href: "/", label: "Location" },
-];
-
-export const Header: React.FC<HeaderProps> = ({ className = "" }) => {
+export const Header: React.FC<{ className?: string }> = ({ className = "" }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  
   const scrollY = useLenisScroll();
   const lenis = useLenis();
 
- 
   const y = useTransform(scrollY, [0, headerHeight], [0, -headerHeight]);
   const opacity = useTransform(scrollY, [0, 200], [1, 0]);
 
-  
   useLayoutEffect(() => {
-    if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+    if (headerRef.current) {
+      const height = headerRef.current.offsetHeight;
+      setHeaderHeight(height);
+      document.documentElement.style.setProperty('--header-height', `${height}px`);
+    }
+    
     const handleResize = () => {
-      if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+      if (headerRef.current) {
+        const height = headerRef.current.offsetHeight;
+        setHeaderHeight(height);
+        document.documentElement.style.setProperty('--header-height', `${height}px`);
+      }
     };
+    
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (!lenis) return;
 
-useEffect(() => {
-  if (!lenis) return;
+    if (isMenuOpen) {
+      lenis.stop();
+      document.body.style.overflow = 'hidden';
+    } else {
+      lenis.start();
+      document.body.style.overflow = '';
+    }
 
-  if (isMenuOpen) {
-    lenis.stop();
-    document.body.style.overflow = 'hidden'; // Stop Lenis smooth scrolling
-  } else {
-    lenis.start(); 
-    // Resume Lenis
-  }
+    return () => {
+      document.body.style.overflow = '';
+      lenis.start();
+    };
+  }, [isMenuOpen, lenis]);
 
-
-  const main = document.querySelector("[data-scroll-container]") as HTMLElement;
-  if (main) main.style.pointerEvents = isMenuOpen ? "none" : "auto";
-
-  return () => {
-    if (main) main.style.pointerEvents = "auto";
-    lenis.start();
-  };
-}, [isMenuOpen, lenis]);
-
-
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
-      {/* Header */}
       <motion.header
         ref={headerRef}
         style={{ y, opacity }}
-        className={`fixed top-0 left-0 z-50 flex w-full justify-between items-center px-4 py-3 md:px-8 md:py-4 ${className}`}
+        className={`fixed top-0 left-0 w-full flex justify-between items-center px-4 py-3 md:px-8 md:py-4 z-50 ${className}`}
       >
-        <Image src="/logo.png" width={300} height={150} alt="Logo" priority />
+        <Container className="flex justify-between items-center py-4">
+        <Image src="/logov2.png" width={250} height={100} alt="Logo" priority />
+        <div className="border px-4 py-2">
+          <h3 className="text-lg">+39 777 888 999</h3>
+        </div>
         <button
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
           aria-label="Toggle menu"
-          className="w-12 h-12 md:w-14 md:h-14"
+          className="w-auto h-auto"
         >
-          
-          <ForkKnife open={isMenuOpen} />
+          <ForkKnife open={isMenuOpen}/>
         </button>
+        </Container>
       </motion.header>
 
-     <MenuModal isOpen={isMenuOpen} headerHeight={headerHeight} onClose={() => setIsMenuOpen(false)} />
-
-
+      <MenuModal 
+        isOpen={isMenuOpen} 
+        headerHeight={headerHeight} 
+        onClose={() => setIsMenuOpen(false)} 
+      />
     </>
   );
 };

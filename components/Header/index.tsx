@@ -63,13 +63,13 @@ export const Header: React.FC<{ className?: string }> = ({ className = "" }) => 
       <motion.header
         ref={headerRef}
         style={{ y, opacity }}
-        className={`fixed top-0 left-0 w-full flex justify-between items-center px-4 py-3 md:px-8 md:py-4 z-50 ${className}`}
+        className={`fixed top-0 left-0 w-full flex justify-between items-center px-4  md:px-10  z-50 ${className}`}
       >
-        <Container className="flex justify-between items-center py-4">
-        <Image src="/logov2.png" width={250} height={100} alt="Logo" priority />
-        <div className="border px-4 py-2">
+        <Container className="flex justify-between items-center py-2 ">
+        <Image src="/logov2.png" width={220} height={200} alt="Logo" priority={true} />
+        {/* <div className="border px-4 py-2">
           <h3 className="text-lg">+39 777 888 999</h3>
-        </div>
+        </div> */}
         <button
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}

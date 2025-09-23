@@ -12,30 +12,34 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
       }}
     >
       {/* Top Section */}
-      <section className="flex items-end px-8 md:px-16">
-        <Container className="">
-        <h1 className="text-2xl md:text-5xl uppercase text-[#65171D] tracking-wide">
+      <section className="px-8">
+        <Container className="h-full flex items-end">
+        <h1 className="text-2xl md:text-5xl uppercase text-secondary  leading-snug">
           Authentic Balkan Flavors, <span className="font-semibold line-clamp-1">Made with Love</span>
         </h1>
         </Container>
       </section>
 
       {/* Hero Image - positioned relative to the grid container */}
-      <div className="absolute top-1/2 left-[70%] transform -translate-x-1/2 -translate-y-1/2">
-        <Image src="/hero.png" width={450} height={450} alt="Plate" />
+      <div className="absolute top-2/3 left-[75%] transform -translate-x-1/2 -translate-y-1/2  ">
+        <Image src="/hero.png" width={450} height={450} alt="Plate" className="md:w-90"/>
       </div>
 
       {/* Bottom Section */}
-      <section className="bg-[#65171D] flex flex-col justify-between p-8 md:px-24 md:py-12">
-        <Container>
-        <p className="text-[#FFEEDF] font-light text-lg md:text-2xl max-w-xl md:max-w-2xl">
-          Discover the rich taste of traditional Balkan cuisine...
-        </p>
+      <section className="flex flex-col items-center justify-evenly bg-secondary px-8">
+        <Container className="h-full">
+        <h4 className="text-primary py-2 font-light  lg:text-2xl md:text-lg lg:max-w-1/2 leading-snug">
+          Discover the rich taste of traditional Balkan cuisine, crafted with fresh ingredients and passion. From sizzling grilled meats to homemade specialties, every dish tells a story.
+        </h4>
+        
+         
+        
+        
         </Container>
-        <Link href="/" className="text-[#FFEEDF] font-light border border-[#FFEEDF] hover:bg-[#FFEEDF] hover:text-[#65171D] transition-colors w-fit mx-auto px-6 py-3">
+         <Link href="/" className="text-primary w-fit h-fit p-4 my-4 text-2xl text-center font-light ">
           Book now 
         </Link>
-        
+      
       </section>
     </div>
   );

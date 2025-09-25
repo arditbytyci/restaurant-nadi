@@ -6,6 +6,7 @@ import {motion, useMotionValueEvent, useScroll, useSpring, useTransform} from 'f
 import { useRef } from "react";
 import test from "node:test";
 import { Hero } from "@/components/Hero";
+import { Slider } from "@/components/Slider/Slider";
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
        <>
       <Hero  />
       <FavoriteDishes />
+      <Slider />
       </>
     
   );

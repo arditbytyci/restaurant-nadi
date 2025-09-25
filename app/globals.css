@@ -4,7 +4,7 @@
   --background: #FFEEDF;
   --foreground: #65171D; 
   --color-primary: #FFEEDF;
-  --color-secondary: #65171D;
+  --color-secondary: #450B1D;
 }
 
 @theme {
@@ -36,3 +36,5 @@ body {
   color: var(--foreground);
   font-family: Poppins;
 }
+
+

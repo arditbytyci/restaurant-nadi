@@ -12,9 +12,7 @@ export const Container: React.FC<ContainerProps> = ({
   as: Component = "div",
 }) => {
   return (
-    <Component
-      className={`max-w-7xl mx-auto  sm:px-6 lg:px-10 w-full ${className}`}
-    >
+    <Component className={`max-w-7xl mx-auto   w-full ${className}`}>
       {children}
     </Component>
   );

@@ -71,10 +71,8 @@ export const Slider = () => {
   };
 
   return (
-    <div className=" bg-secondary h-screen w-full flex flex-col items-center justify-around">
-      <div className="text-center text-primary border">
-        come experience nadi
-      </div>
+    <div className="h-screen w-full flex flex-col items-center justify-evenly p-10">
+      <h2 className="text-center  text-2xl">come experience nadi</h2>
       <Container className="relative w-full h-[80%]  overflow-hidden">
         <motion.div
           drag="x"
@@ -110,7 +108,8 @@ const Images = ({ imgIndex }: { imgIndex: number }) => {
             key={idx}
             style={{
               backgroundImage: `url(${src})`,
-              backgroundSize: "cover",
+              backgroundSize: "100% 100%",
+
               backgroundPosition: "center",
             }}
             transition={{
@@ -120,7 +119,7 @@ const Images = ({ imgIndex }: { imgIndex: number }) => {
               damping: 50,
             }}
             animate={{ scale: imgIndex === idx ? 0.9 : 0.8 }}
-            className="aspect-square w-full h-full shrink-0  rounded-xl object-cover"
+            className="aspect-video w-full h-full shrink-0  rounded-xl object-contain"
           />
         );
       })}
@@ -142,7 +141,7 @@ const Dots = ({
           <button
             key={idx}
             onClick={() => setImgIndex(idx)}
-            className={`w-4 h-4 rounded-full transition-colors  ${
+            className={`w-4 h-4 rounded-full border transition-colors  ${
               idx === imgIndex ? "bg-pink-900" : "bg-primary"
             }`}
           />

@@ -1,38 +1,54 @@
 "use client";
 
 import { FavoriteDishes } from "@/components/FavoriteDishes";
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import { useRef } from "react";
-import test from "node:test";
+import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
 import { Slider } from "@/components/Slider/Slider";
-import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  const { scrollY } = useScroll();
-
   return (
-    <>
-      <section className="">
+    <div className="scroll-container">
+      {" "}
+      {/* Use a class instead of inline styles */}
+      <motion.section
+        className="h-screen snap-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.6 }}
+      >
         <Hero />
-      </section>
-      <section className="">
+      </motion.section>
+      <motion.section
+        className="h-screen snap-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.6 }}
+      >
         <FavoriteDishes />
-      </section>
-
-      <section>
+      </motion.section>
+      <motion.section
+        id="slider"
+        className="h-screen snap-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1 }}
+      >
         <Slider />
-      </section>
-      <section>
+      </motion.section>
+      <motion.section
+        id="footer"
+        className="h-screen snap-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1 }}
+      >
         <Footer />
-      </section>
-    </>
+      </motion.section>
+    </div>
   );
 }

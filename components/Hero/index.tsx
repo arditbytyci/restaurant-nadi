@@ -1,10 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "../Container";
+import { useRef } from "react";
+
+import { motion, useTransform } from "framer-motion";
 
 export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
   return (
-    <div className={`h-screen grid grid-rows-2 ${className}`}>
+    <motion.div
+      className={`h-screen grid grid-rows-2 relative ${className} overflow-hidden`}
+    >
       <div className="absolute top-1/3 left-[10%]  ">
         <Image
           src="/hero.png"
@@ -42,6 +47,6 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
           Book now
         </Link>
       </section>
-    </div>
+    </motion.div>
   );
 };

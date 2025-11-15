@@ -33,37 +33,3 @@ body {
   color: var(--foreground);
   font-family: Poppins;
 }
-
-.scroll-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.snap-section {
-  scroll-snap-align: start;
-  height: 100vh;
-}
-
-.scroll-container {
-  position: relative;
-}
-
-.scroll-container::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  right: 4px;
-  width: 4px;
-  height: 100vh;
-  background: rgba(69, 11, 29, 0.1);
-  pointer-events: none;
-  z-index: 1000;
-}

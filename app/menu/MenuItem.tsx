@@ -1,0 +1,19 @@
+type MenuItemProps = {
+  name: string;
+  price: number | string;
+  description?: string;
+};
+
+const MenuItem = ({ name, price, description }: MenuItemProps) => {
+  return (
+    <div className="py-5 px-4 w-full">
+      <div className="flex flex-row justify-between">
+        <p className="text-xl font-normal">{name}</p>
+        <p className="text-xl">{price}</p>
+      </div>
+      <p className="text-xs font-light">{description}</p>
+    </div>
+  );
+};
+
+export default MenuItem;

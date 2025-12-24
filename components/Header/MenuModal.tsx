@@ -8,9 +8,9 @@ interface MenuModalProps {
 }
 
 const links = [
-  { href: "/menu", label: "Menu" },
-  { href: "/about", label: "About" },
-  { href: "/", label: "Reservation" },
+  { href: "/", label: "Home" },
+  { href: "/menu", label: "menu" },
+  { href: "/about", label: "about" },
   { href: "/", label: "Location" },
 ];
 

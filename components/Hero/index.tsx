@@ -10,7 +10,7 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
     <div
       className={`h-screen grid grid-rows-2 relative ${className} overflow-hidden`}
     >
-      <div className="absolute top-1/3 left-[10%]  ">
+      <div className="absolute top-1/3 left-[10%]">
         <Image
           src="/hero.png"
           width={340}

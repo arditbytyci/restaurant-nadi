@@ -6,10 +6,10 @@ type MenuItemProps = {
 
 const MenuItem = ({ name, price, description }: MenuItemProps) => {
   return (
-    <div className="py-5 px-4 w-full">
-      <div className="flex flex-row justify-between">
+    <div className="py-4 px-4 w-full">
+      <div className="flex flex-row justify-between  items-center">
         <p className="text-xl font-normal">{name}</p>
-        <p className="text-xl">{price}</p>
+        <p className="text-xl">€ {price}</p>
       </div>
       <p className="text-xs font-light">{description}</p>
     </div>

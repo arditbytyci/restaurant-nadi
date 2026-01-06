@@ -1,38 +1,62 @@
-import { motion } from "framer-motion";
+import { m, motion } from "framer-motion";
 type MenuSectionProps = {
   title: string;
   children: React.ReactNode;
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    x: -20,
+    opacity: 0,
+  },
+  show: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+};
 const MenuSection = ({ title, children }: MenuSectionProps) => {
   return (
     <div>
-      <div className="flex flex-col">
+      <motion.div
+        className="flex flex-col"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        // whileInView="show"
+        // viewport={{ once: true, margin: "-100px" }}
+      >
         <div className="flex items-center gap-5 mb-4">
           <motion.span
-            initial={{ x: -30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: "easeInOut", delay: 0.2 }}
+            variants={itemVariants}
             className="whitespace-nowrap text-5xl"
           >
             {title}
           </motion.span>
           <motion.div
             className="flex-1 border-t border-primary"
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: "easeInOut", delay: 0.4 }}
+            variants={itemVariants}
           />
         </div>
-        <motion.div
-          className=""
-          initial={{ x: -20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.9, ease: "easeInOut", delay: 0.6 }}
-        >
+        <motion.div className="" variants={itemVariants}>
           {children}
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };

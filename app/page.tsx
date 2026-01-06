@@ -3,8 +3,9 @@
 import { FavoriteDishes } from "@/components/FavoriteDishes";
 import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
-import { Slider } from "@/components/Slider/Slider";
+// import { Slider } from "@/components/Slider/Slider";
 import { Footer } from "@/components/Footer";
+import SliderComponent from "@/components/Slider/SliderComponent";
 
 /* NOTES: 
 
@@ -35,15 +36,8 @@ export default function Home() {
       >
         <FavoriteDishes />
       </motion.section>
-      <motion.section
-        id="slider"
-        className="h-screen"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: false }}
-        transition={{ duration: 1 }}
-      >
-        <Slider />
+      <motion.section>
+        <SliderComponent />
       </motion.section>
       <motion.section
         id="footer"

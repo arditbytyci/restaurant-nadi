@@ -78,21 +78,29 @@ export const Header: React.FC<{ className?: string }> = ({
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <>
+    <div className="flex flex-row">
       <motion.header
         ref={headerRef}
-        style={{ y, opacity }}
-        className={`fixed top-0 left-0 w-full flex justify-between items-center px-4  md:px-10   z-50 ${className}`}
+        // style={{ y, opacity }}
+        className={`w-1/2  py-2  md:px-10   ${className}`}
       >
-        <Container className="flex justify-between items-center py-2 ">
+        <Container className="flex justify-center items-center">
           <Image
             src="/logov2.png"
             width={180}
             height={200}
             alt="Logo"
+            className="h-24 md:h-28 w-auto xl:h-34"
             priority={true}
           />
-
+        </Container>
+      </motion.header>
+      <motion.div
+        className=" w-1/2 bg-secondary"
+        ref={headerRef}
+        // style={{ y, opacity }}
+      >
+        <Container className=" flex justify-center items-center  py-2">
           <button
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
@@ -102,13 +110,13 @@ export const Header: React.FC<{ className?: string }> = ({
             <ForkKnife open={isMenuOpen} />
           </button>
         </Container>
-      </motion.header>
+      </motion.div>
 
       <MenuModal
         isOpen={isMenuOpen}
         headerHeight={headerHeight}
         onClose={() => setIsMenuOpen(false)}
       />
-    </>
+    </div>
   );
 };

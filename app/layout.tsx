@@ -4,12 +4,7 @@ import "./globals.css";
 
 import { Header } from "@/components/Header";
 import { Providers } from "./providers/Providers";
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["200", "400", "700"],
-});
+import { edLavonia } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Restaurant Nadi",
@@ -22,8 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
+    <html lang="en" className={edLavonia.variable}>
+      <body
+        className="font-sans antialiased leading-relaxed"
+        style={{ fontFamily: "var(--font-ed-lavonia)" }}
+      >
         <Providers>
           <Header />
           <main className="">{children}</main>

@@ -9,22 +9,23 @@ import {
 import { useEffect, useRef } from "react";
 import { DishArticle } from "./DishArticle";
 import { Container } from "../Container";
-import { useScrollY } from "@/app/providers/LenisProvider";
+// import { useScrollY } from "@/app/providers/LenisProvider";
 
 export const FavoriteDishes = () => {
   return (
-    <motion.div className="w-full h-screen">
-      <div className="absolute w-1/2 bg-secondary h-full"></div>
-      <Container className="px-0! h-full relative grid grid-cols-2 gap-30 py-10">
-        <div className="grid grid-rows-2 w-full h-full">
-          <DishArticle name="Tave Kosi" textColor="text-primary" />
-          <DishArticle name="Tave Kosi" textColor="text-primary" />
-        </div>
-        <div className="grid grid-rows-2 w-full h-full">
-          <DishArticle name="Tave Kosi" textColor="text-secondary" />
-          <DishArticle name="Tave Kosi" textColor="text-secondary" />
-        </div>
-      </Container>
+    <motion.div className="w-full min-h-[100svh] grid grid-cols-[auto_auto]">
+      <div className="bg-secondary">
+        <Container className="grid grid-rows-[auto_auto] min-h-[100svh] py-16">
+          <DishArticle name="Tave Kosi" textColor="primary" />
+          <DishArticle name="Tave Kosi" textColor="primary" />
+        </Container>
+      </div>
+      <div>
+        <Container className="grid grid-rows-[auto_auto] min-h-[100svh] py-16">
+          <DishArticle name="Tave Kosi" textColor="secondary" />
+          <DishArticle name="Tave Kosi" textColor="secondary" />
+        </Container>
+      </div>
     </motion.div>
   );
 };

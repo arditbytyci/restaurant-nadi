@@ -6,23 +6,24 @@ import Four from "../../assets/image_restaurant.jpg";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import ImageContainer from "./ImageContainer";
+import { Container } from "../Container";
 
 const SliderComponent = () => {
   const targetRef = useRef(null);
 
   const { scrollYProgress } = useScroll({ target: targetRef });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]);
-
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
+  50;
   return (
-    <div id="carousel" className="h-[350vh]" ref={targetRef}>
+    <div id="carousel" className="h-[450vh]" ref={targetRef}>
       <div
         id="contentContainer"
-        className="h-[100vh] sticky top-0 flex items-center justify-start overflow-hidden"
+        className="min-h-[100svh] sticky top-0 flex items-center justify-start overflow-hidden"
       >
         <motion.div
           id="imageItem"
-          className="grid grid-cols-4 grid-rows-1 gap-[40vw] px-16 py-16"
+          className="flex flex-row gap-x-12 px-6 md:gap-x-28 md:px-16 h-screen"
           style={{ x }}
         >
           <ImageContainer imageSource={One} />

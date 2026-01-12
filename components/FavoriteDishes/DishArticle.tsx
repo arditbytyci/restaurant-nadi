@@ -15,10 +15,16 @@ export const DishArticle = ({
     viewport={{ amount: 0.5 }}
     className="flex flex-col  items-center justify-evenly"
   >
-    <Image src="/hero.png" width={200} height={200} alt={`${name} dish`} />
+    <Image
+      src="/hero.png"
+      width={80}
+      height={80}
+      alt={`${name} dish`}
+      className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-56 lg:h-56"
+    />
     <motion.h3
       initial={{}}
-      className={`text-xl tracking-wide text-primary ${textColor}`}
+      className={` text-2xl md:text-3xl xl:text-4xl tracking-wide text-${textColor}`}
     >
       {name}
     </motion.h3>

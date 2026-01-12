@@ -7,10 +7,10 @@ type ImageProps = {
 
 const ImageContainer = ({ imageSource }: ImageProps) => {
   return (
-    <div className="relative w-[35vw] h-auto">
+    <div className="w-[80vw] h-[140vw] xl:w-[30vw] xl:h-[50vw]   flex items-center ">
       <Image
         src={imageSource}
-        className="h-auto w-[clamp(10rem,50vw,60rem)] rounded-xl"
+        className="h-auto w-auto rounded-xl"
         alt="alt text goes here"
         priority
       />

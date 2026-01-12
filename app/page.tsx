@@ -3,7 +3,7 @@
 import { FavoriteDishes } from "@/components/FavoriteDishes";
 import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
-// import { Slider } from "@/components/Slider/Slider";
+//
 import { Footer } from "@/components/Footer";
 import SliderComponent from "@/components/Slider/SliderComponent";
 
@@ -18,13 +18,7 @@ export default function Home() {
     <div className="">
       {" "}
       {/* Use a class instead of inline styles */}
-      <motion.section
-        className="h-screen"
-        // initial={{ opacity: 0 }}
-        // whileInView={{ opacity: 1 }}
-        // viewport={{ once: false }}
-        // transition={{ duration: 0.6 }}
-      >
+      <motion.section className="">
         <Hero />
       </motion.section>
       <motion.section

@@ -135,18 +135,18 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
           className="absolute top-1/3  w-70 h-70 rounded-full "
           priority
         /> */}
-        <Container className="min-h-[100svh] grid grid-rows-[auto_auto] py-20  md:py-28  lg:py-32">
-          <motion.div className=" flex justify-center">
+        <Container className="min-h-[100svh] grid grid-rows-[auto_auto] py-20  md:py-28 lg:py-10  2xl:py-28">
+          <motion.div className=" flex justify-center lg:items-center  lg:h-fit">
             <Image
               src="/hero.png"
               alt="Plate"
               width={80}
               height={80}
-              className=" w-40 h-40 sm:w-36 sm:h-36 md:w-56 md:h-56 lg:h-72 lg:w-72"
+              className=" w-40 h-40 sm:w-6 sm:h-36 md:w-56 md:h-56 lg:h-72 lg:w-72"
             />
           </motion.div>
 
-          <div className="">
+          <div className="lg:pb-10">
             <motion.h4
               initial={{ opacity: 0, y: -100 }}
               animate={{ opacity: 1, y: 0 }}
@@ -161,13 +161,13 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
         </Container>
       </div>
       <div className="w-1/2 min-h-[100svh] bg-secondary">
-        <Container className="h-full grid grid-rows-[auto_auto_auto]  py-20 md:py-28 lg:py-32  ">
-          <div className="flex flex-col   h-fit w-auto ">
+        <Container className="h-full  grid grid-rows-[auto_auto_auto]  py-20 md:py-28 lg:py-32 ">
+          <div className="flex flex-col h-fit w-auto ">
             <motion.h1
               initial={{ opacity: 0, y: -100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl lg:whitespace-nowrap w-full  text-center lg:tracking-wider whitespace-normal    text-primary"
+              className="font-edlavonia text-3xl sm:text-4xl md:text-5xl lg:text-5xl lg:whitespace-nowrap w-full  text-center lg:tracking-wider whitespace-normal    text-primary"
             >
               Authentic Balkan Flavors,{" "}
               <motion.span

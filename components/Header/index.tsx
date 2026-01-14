@@ -90,7 +90,7 @@ export const Header: React.FC<{ className?: string }> = ({
             width={180}
             height={200}
             alt="Logo"
-            className="h-24 md:h-28 w-auto xl:h-34"
+            className="h-24 md:h-28 w-auto lg:h-36 2xl:h-40"
             priority={true}
           />
         </Container>

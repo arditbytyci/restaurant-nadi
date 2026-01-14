@@ -24,7 +24,7 @@ export const DishArticle = ({
     />
     <motion.h3
       initial={{}}
-      className={` text-2xl md:text-3xl xl:text-4xl tracking-wide text-${textColor}`}
+      className={`font-edlavonia lowercase text-2xl md:text-3xl xl:text-4xl tracking-wide text-${textColor}`}
     >
       {name}
     </motion.h3>

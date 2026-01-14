@@ -29,8 +29,16 @@
   background-color: var(--color-secondary);
 }
 
+.font-edlavonia {
+  font-family: var(--font-ed-lavonia);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Poppins;
+  font-family: var(--font-poppins);
+}
+
+.font-edlavonia {
+  font-family: var(--font-ed-lavonia);
 }

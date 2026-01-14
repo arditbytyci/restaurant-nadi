@@ -44,7 +44,7 @@ const MenuSection = ({ title, children }: MenuSectionProps) => {
         <div className="flex items-center gap-5 mb-4">
           <motion.span
             variants={itemVariants}
-            className="whitespace-nowrap text-5xl"
+            className="font-edlavonia whitespace-nowrap text-5xl"
           >
             {title}
           </motion.span>

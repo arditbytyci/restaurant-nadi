@@ -34,17 +34,17 @@ const MenuSection = ({ title, children }: MenuSectionProps) => {
   return (
     <div>
       <motion.div
-        className="flex flex-col"
+        className="flex flex-col space-y-8"
         variants={containerVariants}
         initial="hidden"
         animate="show"
         // whileInView="show"
         // viewport={{ once: true, margin: "-100px" }}
       >
-        <div className="flex items-center gap-5 mb-4">
+        <div className="flex items-center gap-5 ">
           <motion.span
             variants={itemVariants}
-            className="font-edlavonia whitespace-nowrap text-5xl"
+            className="font-edlavonia whitespace-nowrap text-5xl lg:text-8xl"
           >
             {title}
           </motion.span>

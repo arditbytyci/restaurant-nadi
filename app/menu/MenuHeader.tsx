@@ -1,4 +1,5 @@
 "use client";
+import { Container } from "@/components/Container";
 import { AnimatePresence, motion } from "framer-motion";
 import { filter } from "framer-motion/client";
 import { useEffect, useRef, useState } from "react";
@@ -25,7 +26,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
   }, [mode]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-20 mt-14">
+    <div className="flex flex-col items-center justify-center">
       {/* <motion.header
         ref={headerRef}
         className="text-6xl text-center whitespace-nowrap border"
@@ -37,7 +38,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
       </motion.header> */}
 
       <motion.header
-        className="w-auto text-6xl"
+        className="font-edlavonia w-auto text-4xl whitespace-nowrap lg:text-7xl py-12"
         layout
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -45,7 +46,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
       >
         What to{" "}
         <motion.span
-          className="inline-block underline underline-offset-4 "
+          className="inline-block  bg-secondary rounded-full px-4 text-primary"
           key={mode}
           animate={{ rotateX: 0, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
@@ -55,7 +56,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
         at Nadi
       </motion.header>
       <motion.button
-        className="text-xl w-1/3 rounded-full py-2 bg-secondary text-primary"
+        className="font-edlavonia text-xl lg:text-5xl w-xs rounded-full py-4 px-6 bg-secondary text-primary underline underline-offset-4 border"
         layout
         onClick={onToggle}
         initial={{ y: -30, opacity: 0 }}

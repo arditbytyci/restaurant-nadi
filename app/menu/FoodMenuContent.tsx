@@ -3,7 +3,7 @@ import MenuSection from "./MenuSection";
 
 const FoodMenuContent = () => {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col lg:space-y-20  pb-40">
       <MenuSection title="Starters">
         <MenuItem
           name="Sallate shope"

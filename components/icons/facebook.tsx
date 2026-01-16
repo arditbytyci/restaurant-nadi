@@ -1,4 +1,8 @@
-export const Facebook = () => {
+interface FacebookProps {
+  color?: string;
+}
+
+export const Facebook: React.FC<FacebookProps> = ({ color = "#450b1d" }) => {
   return (
     <svg
       width="64"
@@ -10,7 +14,7 @@ export const Facebook = () => {
     >
       <path
         d="M322.56 113.493H362.667V45.6533C343.248 43.6341 323.737 42.6371 304.213 42.6667C246.187 42.6667 206.507 78.08 206.507 142.933V198.827H141.013V274.773H206.507V469.333H285.013V274.773H350.293L360.107 198.827H285.013V150.4C285.013 128 290.987 113.493 322.56 113.493Z"
-        fill="#450B1D"
+        fill={color}
       />
     </svg>
   );

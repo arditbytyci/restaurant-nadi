@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Providers } from "./providers/Providers";
 import { edLavonia } from "./fonts";
+import PageLoader from "@/components/PageLoader";
 
 export const metadata: Metadata = {
   title: "Restaurant Nadi",
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className={`${poppins.variable} ${edLavonia.variable}`}>
       <body className="font-sans antialiased leading-relaxed">
         <Providers>
+          <PageLoader />
           <Header />
           <main className="">{children}</main>
         </Providers>

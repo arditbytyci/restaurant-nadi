@@ -1,0 +1,19 @@
+<div className="flex items-start justify-center">
+        <ChefCooking />
+      </div>
+      <div className="bg-secondary text-primary">
+        <Container className=" h-auto space-y-16">
+          <MenuHeader
+            mode={mode}
+            onToggle={() =>
+              setMode((prev) => (prev === "eat" ? "drink" : "eat"))
+            }
+          />
+          <div className="flex flex-row items-center justify-center">
+            <div className="w-3/5 h-full">
+              {mode === "eat" ? <FoodMenuContent /> : <DrinksMenuContent />}
+            </div>
+          </div>
+        </Container>
+      </div>
+    </div> 

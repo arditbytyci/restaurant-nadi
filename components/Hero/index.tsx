@@ -167,14 +167,14 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
               initial={{ opacity: 0, y: -100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-              className="font-edlavonia text-3xl sm:text-4xl md:text-5xl lg:text-5xl lg:whitespace-nowrap w-full  text-center lg:tracking-wider whitespace-normal    text-primary"
+              className="font-edlavonia text-3xl sm:text-4xl md:text-5xl lg:text-7xl lg:whitespace-nowrap w-full  text-center lg:tracking-wider whitespace-normal    text-primary"
             >
               Authentic Balkan Flavors,{" "}
               <motion.span
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
-                className="font-semibold text-xl sm:text-2xl  md:text-4xl lg:text-4xl  lg:line-clamp-1  text-left lg:text-center  w-auto    tracking-widest"
+                className="font-semibold text-xl sm:text-2xl  md:text-4xl lg:text-7xl  lg:line-clamp-1  text-left lg:text-right lg:px-16 leading-relaxed w-auto    tracking-widest"
               >
                 Made with Love
               </motion.span>

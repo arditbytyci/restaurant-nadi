@@ -11,7 +11,7 @@ const MenuPage: React.FC = ({}) => {
   const [mode, setMode] = useState<"eat" | "drink">("eat");
 
   return (
-    <div className="h-full relative py-8">
+    <div className="h-full relative py-8 pt-[var(--header-height)]">
       <Container className=" items-center justify-center flex flex-col gap-20">
         <MenuHeader
           mode={mode}

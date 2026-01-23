@@ -1,21 +1,22 @@
-import { JSX } from "react";
+import React, { forwardRef, ElementType } from "react";
 
-interface ContainerProps {
+type ContainerProps<T extends ElementType = "div"> = {
   children: React.ReactNode;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
-}
-
-export const Container: React.FC<ContainerProps> = ({
-  children,
-  className = "",
-  as: Component = "div",
-}) => {
-  return (
-    <Component
-      className={`mx-auto max-w-[90rem] px-6 sm:px-6 lg:px-10 xl:px-20 w-full ${className}`}
-    >
-      {children}
-    </Component>
-  );
+  as?: T;
 };
+
+export const Container = forwardRef<HTMLElement, ContainerProps>(
+  ({ children, className = "", as: Component = "div" }, ref) => {
+    return (
+      <Component
+        ref={ref as any}
+        className={`mx-auto max-w-[110rem] px-6 sm:px-6 lg:px-10 xl:px-16 w-full ${className}`}
+      >
+        {children}
+      </Component>
+    );
+  },
+);
+
+Container.displayName = "Container";

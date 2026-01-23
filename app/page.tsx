@@ -18,9 +18,9 @@ export default function Home() {
     <div className="">
       {" "}
       {/* Use a class instead of inline styles */}
-      <motion.section className="">
+      <section>
         <Hero />
-      </motion.section>
+      </section>
       <motion.section
         className="h-screen"
         initial={{ opacity: 0 }}

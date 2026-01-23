@@ -3,9 +3,10 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import { Header } from "@/components/Header";
-import { Providers } from "./providers/Providers";
+
 import { edLavonia } from "./fonts";
 import PageLoader from "@/components/PageLoader";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Restaurant Nadi",
@@ -25,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${poppins.variable} ${edLavonia.variable}`}>
-      <body className="font-sans antialiased leading-relaxed">
+      <body className="font-sans antialiased ">
         <Providers>
           <PageLoader />
           <Header />

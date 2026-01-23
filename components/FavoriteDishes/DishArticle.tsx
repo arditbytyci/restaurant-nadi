@@ -19,6 +19,7 @@ export const DishArticle = ({
       src="/hero.png"
       width={80}
       height={80}
+      priority={true}
       alt={`${name} dish`}
       className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-56 lg:h-56"
     />

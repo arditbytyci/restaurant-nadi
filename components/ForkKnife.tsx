@@ -18,7 +18,7 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({
       viewBox="0 0 100 120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`h-20 md:h-22 xl:h-36 w-auto  lg:p-4  rounded-full ${className} transition-colors duration-300`}
+      className={`h-20 md:h-22 xl:h-32 w-auto  lg:p-4  rounded-full ${className} transition-colors duration-300 relative z-60`}
     >
       <motion.g
         animate={open ? { rotate: 40, x: 4, y: 2 } : { rotate: 0, x: 0, y: 0 }}

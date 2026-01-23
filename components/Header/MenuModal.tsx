@@ -3,10 +3,12 @@ import { Link } from "next-view-transitions";
 import { motion } from "framer-motion";
 import { Container } from "../Container";
 import Image from "next/image";
+import { Facebook } from "../icons/facebook";
+import { Instagram } from "../icons/instagram";
 
 interface MenuModalProps {
   isOpen: boolean;
-  headerHeight: number;
+  headerHeight?: number;
   onClose: () => void;
 }
 
@@ -30,9 +32,9 @@ export const MenuModal: React.FC<MenuModalProps> = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           style={{
-            height: "min-h-100svh",
+            height: "100%",
           }}
-          className="absolute inset-0 z-40 overflow-y-auto h-full w-full bg-secondary  flex flex-col items-center justify-around"
+          className="absolute inset-0 z-40 overflow-y-hidden h-full w-full bg-secondary  flex flex-col items-center justify-around"
         >
           {/* <div className="text-primary top-0 p-15  flex flex-row w-full absolute items-center space-x-10">
             <Facebook />
@@ -79,7 +81,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({
           </div> */}
 
           <div className=" min-h-[100svh] w-full pt-[var(--header-height)] grid grid-cols-[1fr] lg:grid-cols-[1fr_1fr_1fr]">
-            <div className=" hidden lg:flex lg:flex-col lg:items-center  lg:justify-around  py-8 opacity-50">
+            <div className=" hidden lg:flex lg:flex-col lg:items-center  lg:justify-around  py-8 opacity-50 ">
               <div className=" w-96 aspect-[4/5] relative ">
                 <Image
                   src="/grill.jpg"
@@ -93,14 +95,14 @@ export const MenuModal: React.FC<MenuModalProps> = ({
               <p className="text-primary text-4xl">Text here!</p>
             </div>
             <div className="">
-              <div className="flex flex-col items-center justify-center space-y-16 py-8 lg:pt-0">
-                <Image
+              <div className="flex flex-col items-center justify-evenly lg:justify-center lg:space-y-16 py-6 lg:pt-0 h-full">
+                {/* <Image
                   width={250}
                   height={200}
                   src="/logo-white.png"
                   alt="logo_white"
                   className="w-auto h-auto"
-                />
+                /> */}
                 {links.map((link, index) => (
                   <motion.div
                     key={link.href}
@@ -117,6 +119,10 @@ export const MenuModal: React.FC<MenuModalProps> = ({
                     </Link>
                   </motion.div>
                 ))}
+                <div className="flex flex-row items-center justify-center space-x-18">
+                  <Instagram color="#ffeedf" height="18" width="auto" />
+                  <Facebook color="#ffeedf" height="18" width="auto" />
+                </div>
               </div>
             </div>
             <div className=" hidden lg:flex lg:flex-col lg:items-center  lg:justify-around  py-8 opacity-50">

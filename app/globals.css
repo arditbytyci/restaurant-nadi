@@ -42,3 +42,22 @@ body {
 .font-edlavonia {
   font-family: var(--font-ed-lavonia);
 }
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Set header height variable */
+:root {
+  --header-height: 120px; /* Adjust based on your actual header height */
+}
+
+/* Optional: Add smooth transitions */
+html {
+  scroll-behavior: smooth;
+}

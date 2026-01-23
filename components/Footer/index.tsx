@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Container } from "../Container";
 import Link from "next/link";
-import { Ellipse } from "../Ellipse";
 import { Facebook } from "../icons/facebook";
 import { Instagram } from "../icons/instagram";
 import LocationSvg from "../icons/location";

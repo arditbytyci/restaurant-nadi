@@ -1,12 +1,12 @@
 "use client";
 
+import { SmoothScroll } from "./scroll";
 import { ViewTransitions } from "next-view-transitions";
-import { LenisProvider } from "./LenisProvider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <LenisProvider>
+    <SmoothScroll>
       <ViewTransitions>{children}</ViewTransitions>
-    </LenisProvider>
+    </SmoothScroll>
   );
 }

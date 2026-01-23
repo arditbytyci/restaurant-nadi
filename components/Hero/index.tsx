@@ -125,72 +125,114 @@ export const Hero: React.FC<{ className?: string }> = ({ className = "" }) => {
     //   </section>
     // </div>
 
-    <div className="min-h-[100svh] flex flex-row">
-      <div className="w-1/2 min-h-[100svh]">
-        {/* <Image
-          src="/ura_svg.svg"
-          alt=""
-          width={40}
-          height={40}
-          className="absolute top-1/3  w-70 h-70 rounded-full "
-          priority
-        /> */}
-        <Container className="min-h-[100svh] grid grid-rows-[auto_auto] py-20  md:py-28 lg:py-10  2xl:py-28">
-          <motion.div className=" flex justify-center lg:items-center  lg:h-fit">
-            <Image
-              src="/hero.png"
-              alt="Plate"
-              width={80}
-              height={80}
-              className=" w-40 h-40 sm:w-6 sm:h-36 md:w-56 md:h-56 lg:h-72 lg:w-72"
-            />
-          </motion.div>
+    // <div className="min-h-[100svh] flex flex-row">
+    //   <div className="w-1/2 min-h-[100svh]">
+    //     {/* <Image
+    //       src="/ura_svg.svg"
+    //       alt=""
+    //       width={40}
+    //       height={40}
+    //       className="absolute top-1/3  w-70 h-70 rounded-full "
+    //       priority
+    //     /> */}
+    //     <Container className="min-h-[100svh] grid grid-rows-[auto_auto] py-20  md:py-28 lg:py-10  2xl:py-28">
+    //       <motion.div className=" flex justify-center lg:items-center  lg:h-fit">
+    //         <Image
+    //           src="/hero.png"
+    //           alt="Plate"
+    //           width={80}
+    //           height={80}
+    //           className=" w-40 h-40 sm:w-6 sm:h-36 md:w-56 md:h-56 lg:h-72 lg:w-72"
+    //         />
+    //       </motion.div>
 
-          <div className="lg:pb-10">
-            <motion.h4
-              initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="text-secondary font-extralight text-xl sm:text-2xl md:text-3xl lg:text-4xl"
-            >
-              Discover the rich taste of traditional Balkan cuisine, crafted
-              with fresh ingredients and passion. From sizzling grilled meats to
-              homemade specialties, every dish tells a story.
-            </motion.h4>
+    //       <div className=""></div>
+    //     </Container>
+    //   </div>
+    //   <div className="w-1/2 min-h-[100svh]  rounded-tl-4xl ">
+    //     <Container className="h-full  grid grid-rows-[auto_auto]  py-20 md:py-28 lg:py-8 gap-4  ">
+    //       <div className="flex flex-col h-fit w-fit ">
+    //         <motion.h1
+    //           initial={{ opacity: 0, y: -100 }}
+    //           animate={{ opacity: 1, y: 0 }}
+    //           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+    //           className="font-edlavonia text-3xl sm:text-4xl md:text-5xl lg:text-5xl lg:whitespace-nowrap   text-center lg:tracking-wider whitespace-normal "
+    //         >
+    //           Authentic Balkan Flavors,{" "}
+    //           <motion.span
+    //             initial={{ opacity: 0, x: -100 }}
+    //             animate={{ opacity: 1, x: 0 }}
+    //             transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
+    //             className="font-semibold text-xl sm:text-2xl  md:text-4xl lg:text-5xl  lg:line-clamp-1  text-left lg:text-right  leading-relaxed w-auto    tracking-widest"
+    //           >
+    //             Made with Love
+    //           </motion.span>
+    //         </motion.h1>
+    //       </div>
+    //       {/* <div />
+    //       <div className="flex items-center h-fit justify-center ">
+    //         <Link
+    //           href=""
+    //           className="text-primary p-2 text-3xl md:text-4xl lg:text-5xl underline underline-offset-8 bg-secondary text-center font-light"
+    //         >
+    //           view menu
+    //         </Link>
+    //       </div> */}
+    //       <motion.h4
+    //         initial={{ opacity: 0, y: -100 }}
+    //         animate={{ opacity: 1, y: 0 }}
+    //         transition={{ duration: 1, ease: "easeOut" }}
+    //         className=" font-extralight text-xl sm:text-2xl md:text-3xl lg:text-3xl"
+    //       >
+    //         Discover the rich taste of traditional Balkan cuisine, crafted with
+    //         fresh ingredients and passion. From sizzling grilled meats to
+    //         homemade specialties, every dish tells a story.
+    //       </motion.h4>
+    //     </Container>
+    //   </div>
+    // </div>
+    <>
+      <Container className="absolute inset-0 z-10 ">
+        <div className="grid lg:grid-cols-[1fr_1fr] lg:gap-10 grid-rows-[auto_auto_auto] lg:grid-rows-none   min-h-[100svh]  pt-[var(--header-height)] h-full w-full">
+          <div className="lg:flex lg:items-center lg:justify-center hidden lg:py-14 lg:pr-24">
+            <div className="relative w-full h-full">
+              <Image
+                src="/balkan_food.jpg"
+                fill
+                priority={true}
+                alt="balkan_food"
+                className="rounded-xl lg:object-fill object-cover opacity-85"
+              />
+            </div>
           </div>
-        </Container>
-      </div>
-      <div className="w-1/2 min-h-[100svh] bg-secondary">
-        <Container className="h-full  grid grid-rows-[auto_auto_auto]  py-20 md:py-28 lg:py-32 ">
-          <div className="flex flex-col h-fit w-auto ">
-            <motion.h1
-              initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-              className="font-edlavonia text-3xl sm:text-4xl md:text-5xl lg:text-7xl lg:whitespace-nowrap w-full  text-center lg:tracking-wider whitespace-normal    text-primary"
-            >
-              Authentic Balkan Flavors,{" "}
-              <motion.span
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
-                className="font-semibold text-xl sm:text-2xl  md:text-4xl lg:text-7xl  lg:line-clamp-1  text-left lg:text-right lg:px-16 leading-relaxed w-auto    tracking-widest"
-              >
-                Made with Love
-              </motion.span>
-            </motion.h1>
+          <div className=" grid  grid-rows-[1fr_1fr]  h-full   gap-6 ">
+            <div className="flex lg:items-end items-end">
+              <h1 className="font-edlavonia leading-tight text-5xl  h-fit lg:whitespace-nowrap  sm:whitespace-normal   md:text-5xl lg:text-8xl  text-secondary text-right    w-full">
+                Authentic Balkan Flavors,
+                <span className="font-poppins font-semibold  text-4xl lg:text-7xl line-clamp-1">
+                  Made with Love
+                </span>
+              </h1>
+            </div>
+            <div className="flex flex-col  items-center">
+              <h4 className="text-primary   leading-relaxed  font-light text-xl   md:text-lg lg:text-4xl lg:min-w-2xl  text-right">
+                Discover the rich taste of traditional Balkan cuisine, crafted
+                with fresh ingredients and passion. From sizzling grilled meats
+                to homemade specialties, every dish tells a story.
+              </h4>
+            </div>
           </div>
-          <div />
-          <div className="flex items-center h-fit justify-center ">
-            <Link
-              href=""
-              className="text-primary p-2 text-3xl md:text-4xl lg:text-5xl underline underline-offset-8 bg-secondary text-center font-light"
-            >
+          <div className="flex items-center justify-center lg:hidden">
+            <p className="text-2xl text-primary underline underline-offset-8">
               view menu
-            </Link>
+            </p>
           </div>
-        </Container>
+        </div>
+      </Container>
+      <div className="min-h-[100svh]   grid grid-rows-[1fr_1fr]  relative lg:pt-[var(--header-height)]">
+        <div className=""></div>
+        <div className="bg-secondary"></div>
       </div>
-    </div>
+    </>
   );
 };

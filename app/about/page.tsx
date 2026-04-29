@@ -1,8 +1,9 @@
 "use client";
 
-import { Container } from "@/components/Container";
-import { Header } from "@/components/Header";
-import MapComponent from "@/components/Map";
+import { Container } from "@/components/layout/Container";
+
+import { Header } from "@/components/layout/Header/Header";
+import MapComponent from "@/components/Map/Map";
 import { useRef, useEffect, useState } from "react";
 
 export default function AboutPage() {
@@ -86,11 +87,11 @@ export default function AboutPage() {
     };
 
     // Handle touch for mobile - simplified
-    let touchStartY = 0;
+    // let touchStartY = 0;
     let isTouchScrolling = false;
 
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
+      // touchStartY = e.touches[0].clientY;
       isTouchScrolling = true;
 
       // On mobile, don't interfere with map scrolling
@@ -235,9 +236,9 @@ export default function AboutPage() {
                 Our Story
               </h1>
               <p className="text-base text-primary sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                Add your restaurant's story, team information, or other content
-                here. This section is fully responsive and will look great on
-                all devices.
+                Add your restaurant&apos;s story, team information, or other
+                content here. This section is fully responsive and will look
+                great on all devices.
               </p>
             </div>
           </div>

@@ -1,4 +1,4 @@
-const LocationSvg = () => {
+export const Location = () => {
   return (
     <svg
       width="18"
@@ -15,5 +15,3 @@ const LocationSvg = () => {
     </svg>
   );
 };
-
-export default LocationSvg;

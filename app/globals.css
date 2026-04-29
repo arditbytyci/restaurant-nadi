@@ -39,10 +39,6 @@ body {
   font-family: var(--font-poppins);
 }
 
-.font-edlavonia {
-  font-family: var(--font-ed-lavonia);
-}
-
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -55,9 +51,4 @@ body {
 /* Set header height variable */
 :root {
   --header-height: 120px; /* Adjust based on your actual header height */
-}
-
-/* Optional: Add smooth transitions */
-html {
-  scroll-behavior: smooth;
 }

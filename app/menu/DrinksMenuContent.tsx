@@ -4,7 +4,7 @@ import MenuSection from "./MenuSection";
 const DrinksMenuContent = () => {
   return (
     <div className="flex flex-col gap-10">
-      <MenuSection title="Wine">
+      {/* <MenuSection title="Wine">
         <MenuItem
           name="Hisari Red"
           price={18.5}
@@ -49,7 +49,7 @@ const DrinksMenuContent = () => {
           price={6}
           description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
         />
-      </MenuSection>
+      </MenuSection> */}
     </div>
   );
 };

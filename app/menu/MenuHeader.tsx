@@ -1,42 +1,32 @@
 "use client";
-import { Container } from "@/components/Container";
-import { AnimatePresence, motion } from "framer-motion";
-import { filter } from "framer-motion/client";
-import { useEffect, useRef, useState } from "react";
+
+import { motion } from "framer-motion";
+
+import { useRef } from "react";
 interface MenuHeaderProps {
   mode: "eat" | "drink";
   onToggle: () => void;
 }
 
-const flipVariants = {
-  initial: { rotateX: 90, opacity: 0 },
-  animate: { rotateX: 0, opacity: 1 },
-  exit: { rotateX: -90, opacity: 0, filter: "blur(1px)" },
-};
+// const flipVariants = {
+//   initial: { rotateX: 90, opacity: 0 },
+//   animate: { rotateX: 0, opacity: 1 },
+//   exit: { rotateX: -90, opacity: 0, filter: "blur(1px)" },
+// };
 
 const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
-  const headerRef = useRef<HTMLHeadingElement>(null);
+  // const headerRef = useRef<HTMLHeadingElement>(null);
 
-  const [headerWidth, setHeaderWidth] = useState<number>(0);
+  // const [headerWidth, setHeaderWidth] = useState<number>(0);
 
-  useEffect(() => {
-    if (headerRef.current) {
-      setHeaderWidth(headerRef.current.scrollWidth);
-    }
-  }, [mode]);
+  // useEffect(() => {
+  //   if (headerRef.current) {
+  //     setHeaderWidth(headerRef.current.scrollWidth);
+  //   }
+  // }, [mode]);
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      {/* <motion.header
-        ref={headerRef}
-        className="text-6xl text-center whitespace-nowrap border"
-        initial={{ width: "auto" }}
-        animate={{ width: headerWidth > 0 ? `${headerWidth}px` : "auto" }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      >
-        What to <span className="">{mode}</span> at Nadi
-      </motion.header> */}
-
+    <div className="flex flex-col items-center justify-center ">
       <motion.header
         className="font-edlavonia w-auto text-4xl whitespace-nowrap lg:text-7xl py-12"
         layout

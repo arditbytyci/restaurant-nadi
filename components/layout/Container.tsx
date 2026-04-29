@@ -1,16 +1,16 @@
 import React, { forwardRef, ElementType } from "react";
 
-type ContainerProps<T extends ElementType = "div"> = {
+type ContainerProps = {
   children: React.ReactNode;
   className?: string;
-  as?: T;
+  as?: ElementType;
 };
 
 export const Container = forwardRef<HTMLElement, ContainerProps>(
   ({ children, className = "", as: Component = "div" }, ref) => {
     return (
       <Component
-        ref={ref as any}
+        ref={ref as React.Ref<HTMLElement>}
         className={`mx-auto max-w-[110rem] px-6 sm:px-6 lg:px-10 xl:px-16 w-full ${className}`}
       >
         {children}

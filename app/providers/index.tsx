@@ -1,6 +1,6 @@
 "use client";
 
-import { SmoothScroll } from "./scroll";
+import { SmoothScroll } from "./SmoothScroll";
 import { ViewTransitions } from "next-view-transitions";
 
 export function Providers({ children }: { children: React.ReactNode }) {

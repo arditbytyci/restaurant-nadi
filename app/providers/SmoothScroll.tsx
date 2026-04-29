@@ -6,20 +6,20 @@ import { useEffect, useState } from "react";
 
 // Configuration for desktop
 const DESKTOP_CONFIG = {
-  duration: 1.4,
-  easing: (t: number) => 1 - Math.pow(1 - t, 3),
-  lerp: 0.08,
+  duration: 1.2,
+  easing: (t: number) => 1 - Math.pow(1 - t, 4),
+  lerp: 0.1,
   smoothWheel: true,
   smoothTouch: false, // Disable on mobile
   syncTouch: false,
-  wheelMultiplier: 0.7,
+  wheelMultiplier: 1,
   touchMultiplier: 1.2,
   infinite: false,
   orientation: "vertical" as const,
 };
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 

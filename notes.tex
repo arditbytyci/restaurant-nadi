@@ -1,22 +1,306 @@
 
 
-About page: first display a text of the history of the restaurant, then show some pohotos and last show the location all this in a parallax effect
+Good, I've read everything. Here's the full breakdown:
+
+---
+
+## Issues Found
+
+### 🔴 Critical — About page has its own DIY smooth scroll fighting Lenis
+
+`app/about/page.tsx` implements a **completely custom `requestAnimationFrame` scroll loop** with lerp (`* 0.04`) on a `fixed` container. This means you have:
+- Lenis running globally
+- A custom scroll loop running on top of it
+- Both fighting each other → major jank
+
+The fix is to ditch the entire custom scroll logic and let Lenis handle it. The about page also has a `<style jsx>` block (requires `styled-jsx` which isn't installed) and `WebkitOverflowScrolling` which is deprecated.
+
+---
+
+### 🔴 Critical — `Section.tsx` animates on *every* scroll pass
+
+```tsx
+viewport={{ once: false }} // ← this re-triggers every time the section enters view
+```
+
+Every time you scroll back up and then down, it re-animates the section with `y: 50 → 0`. Change to `once: true`.
+
+---
+
+### 🟡 Medium — `PageLoader.tsx` is a mess
+
+The file is entirely commented-out PageLoader code, then has `Hero` component code pasted *inside it* (it actually exports `Hero`, not a loader). This file isn't doing anything useful and is confusing your component tree.
+
+---
+
+### 🟡 Medium — `SliderComponent` imports the same image 4 times
+
+```tsx
+import One from "../../assets/image_restaurant.jpg";
+import Two from "../../assets/image_restaurant.jpg"; // same file
+import Three from "../../assets/image_restaurant.jpg"; // same file
+import Four from "../../assets/image_restaurant.jpg"; // same file
+```
+
+Also, `assets/image_restaurant.jpg` is **2.8MB** — this is massive for a web image. `balkan_food.jpg` is also 2.2MB. These are the biggest performance killers for initial load.
+
+---
+
+### 🟡 Medium — `DishArticle` has `priority={true}` on below-fold images
+
+```tsx
+<Image src="/hero.png" priority={true} ... />
+```
+
+`priority` tells Next.js to preload the image immediately. Using it on images that are *below the fold* wastes bandwidth and slows LCP. Only the hero/first-visible image should have `priority`.
+
+---
+
+### 🟡 Medium — `FavoriteDishes` wraps everything in `<motion.div>` for no reason
+
+```tsx
+<motion.div className="w-full min-h-[100svh] grid grid-cols-[auto_auto]">
+```
+
+No animation props, just a `motion.div` with layout classes. This adds Framer Motion overhead for nothing. Change to a plain `<div>`.
+
+---
+
+### 🟡 Medium — `hasMounted` state in Header is unused
+
+```tsx
+const [hasMounted, setHasMounted] = useState(false);
+// ...
+useEffect(() => { setHasMounted(true); }, []);
+// hasMounted is never read
+```
+
+Dead state causing an extra render on mount for nothing.
+
+---
+
+### 🟡 Medium — `isPrimaryBgPage` computed but never used in Header
+
+```tsx
+const isPrimaryBgPage = primaryBgPages.includes(pathname);
+// never used below
+```
+
+Dead computation on every render.
+
+---
+
+### 🟢 Minor — `next-view-transitions` and `next-transition-router` both installed
+
+You're using `next-view-transitions` (`Link` in MenuModal) but also have `next-transition-router` in `package.json`. These overlap in purpose. Pick one and remove the other.
+
+---
+
+### 🟢 Minor — `motion.p` in Header has no animation props
+
+```tsx
+<motion.p className={...}>
+  Via Tommaso da Modena...
+</motion.p>
+```
+
+No `initial`, `animate`, nothing. Just a `<p>` with extra JS weight.
+
+---
+
+## Summary of fixes
+
+| File | Fix |
+|---|---|
+| `app/about/page.tsx` | Delete all custom scroll logic, use normal Lenis flow |
+| `app/Section.tsx` | `viewport={{ once: true }}` |
+| `public/` images | Compress `balkan_food.jpg` and `image_restaurant.jpg` (target <200KB each) |
+| `components/FavoriteDishes/DishArticle.tsx` | Remove `priority` from dish images |
+| `components/FavoriteDishes/index.tsx` | Change `motion.div` → `div` |
+| `components/Header/index.tsx` | Remove `hasMounted` state, remove `isPrimaryBgPage`, change `motion.p` → `p` |
+| `components/PageLoader.tsx` | Delete the file entirely, it's broken |
+| `components/Slider/SliderComponent.tsx` | Import one image, compress it |
+
+Want me to write out the fixed versions of any of these files?
 
 
-hero: at the bottom find and idea what to put there
-
-todos: 
-- fix the header when u scroll ✅
-- make the layout have same sapcing left and right side so they fit ✅
-- finish the responsiveness and everything about hero ✅
-- start making the second section responsive. ✅ 
-- make loader fullscreen of nadi: both colors ✅/2
-
-the header will show on menu but just the ForkKnife button, intead of showing the logo we show number,instagram and face book ✅ 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
-% Look up for vercel free version for hosting and deployment.
+Looking at your project, here's a full assessment:
 
-% have some research about the idea of scrolling horizontally.
+---
+
+## Your Structure (the good parts)
+
+You did several things right:
+- Colocating `MenuModal.tsx` inside `components/Header/` — related components together ✓
+- Using `index.tsx` as barrel files for component folders ✓
+- Separating `providers/` from `components/` ✓
+- Keeping page-specific components (`MenuHeader`, `FoodMenuContent`) inside `app/menu/` ✓
+
+---
+
+## What's Wrong / Inconsistent
+
+**Naming inconsistencies:**
+- `SliderComponent.tsx` — the `Component` suffix is redundant. Everything in components/ is a component. Just `Slider.tsx`
+- `FoodMenuContent.tsx`, `DrinksMenuContent.tsx` — `Content` suffix is vague
+- `ImageContainer.tsx` — `Container` suffix means something specific in your codebase (you have a `Container.tsx` layout wrapper). Naming collision in intent
+- `PageLoader.tsx` — doesn't load pages, and currently exports `Hero`. Completely wrong name
+- `scroll.tsx` in `providers/` — lowercase file exporting a React component (`SmoothScroll`). Should be `SmoothScroll.tsx`
+- `Map.tsx` exports `MapComponent` — the file name and export name don't match
+
+**Folder issues:**
+- `assets/` at the root level alongside `public/` — you have two image directories. In Next.js, everything served statically should be in `public/`. `assets/` should only exist inside `src/` if used as imports, not mixed
+- `app/test/` — leftover test folder sitting in production code
+- `components/icons/` has flat files (`facebook.tsx`, `instagram.tsx`) — fine now, but no `index.ts` barrel, so every import is a full path
+
+---
+
+## Professional Standards (modern Next.js projects)
+
+**File naming:**
+```
+PascalCase     → React components       Hero.tsx, MenuModal.tsx
+camelCase      → utilities/hooks        useScrollPosition.ts, formatDate.ts
+kebab-case     → config / non-component next.config.ts, tailwind.config.ts
+SCREAMING_CASE → constants              API_ROUTES.ts, MENU_ITEMS.ts
+```
+
+**Folder structure for a Next.js app your size:**
+```
+src/
+├── app/                        # Next.js routing only — pages + layouts
+│   ├── (home)/                 # Route groups with () don't affect URL
+│   │   └── page.tsx
+│   ├── menu/
+│   │   └── page.tsx
+│   ├── about/
+│   │   └── page.tsx
+│   ├── layout.tsx
+│   └── globals.css
+│
+├── components/                 # Shared, reusable UI
+│   ├── ui/                     # Primitive/generic: Button, Badge, Card
+│   ├── layout/                 # Header, Footer, Container, Section
+│   ├── sections/               # Page sections: Hero, FavoriteDishes, Slider
+│   └── icons/
+│       └── index.ts            # Barrel export all icons
+│
+├── lib/                        # Utilities, helpers, config
+│   └── utils.ts
+│
+├── hooks/                      # Custom React hooks
+│   └── useMediaQuery.ts
+│
+├── constants/                  # Static data, config values
+│   └── menu.ts
+│
+├── types/                      # Shared TypeScript types
+│   └── index.ts
+│
+└── providers/                  # Context providers
+    └── index.tsx
+```
+
+**Component file anatomy (what's professional inside a file):**
+```tsx
+// 1. Imports — external first, then internal
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Container } from "@/components/layout/Container"
+
+// 2. Types/interfaces above the component
+interface HeroProps {
+  title: string
+  subtitle?: string
+}
+
+// 3. Constants outside the component (not inside — avoids re-creation)
+const ANIMATION_VARIANTS = { ... }
+
+// 4. Named export (not default — easier to refactor/find)
+export const Hero = ({ title, subtitle }: HeroProps) => {
+  return (...)
+}
+```
+
+**Export style — named over default:**
+```tsx
+// ❌ default export — harder to track, can be renamed on import
+export default function Hero() {}
+
+// ✅ named export — explicit, refactor-safe, autocomplete-friendly
+export const Hero = () => {}
+```
+
+Your project mixes both. `SliderComponent`, `MenuPage`, `AboutPage` are default exports while most components are named. Pick named exports and stick to it — the only exception is Next.js pages/layouts which *require* default exports.
+
+**Barrel files (`index.ts`) done right:**
+```ts
+// components/icons/index.ts
+export { Facebook } from "./Facebook"
+export { Instagram } from "./Instagram"
+export { Location } from "./Location"
+
+// Then import anywhere as:
+import { Facebook, Instagram } from "@/components/icons"
+```
+
+**Hook naming:**
+```ts
+// ❌ what you have — logic buried in components
+const [isMobile, setIsMobile] = useState(false)
+useEffect(() => { ... window resize ... }, [])  // repeated in 3 files
+
+// ✅ extract to a hook
+// hooks/useMediaQuery.ts
+export const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => { ... }, [])
+  return isMobile
+}
+```
+
+You repeat the mobile detection pattern in `about/page.tsx`, `scroll.tsx`, and `Header/index.tsx` — that's a textbook case for a shared hook.
+
+---
+
+## Quick Wins for Your Project Right Now
+
+```
+Rename:
+  scroll.tsx          → SmoothScroll.tsx
+  SliderComponent.tsx → Slider.tsx
+  ImageContainer.tsx  → SliderItem.tsx
+  Map.tsx             → RestaurantMap.tsx (or just MapEmbed.tsx)
+
+Move:
+  components/Hero/    → components/sections/Hero/
+  components/Slider/  → components/sections/Slider/
+  components/Footer/  → components/layout/Footer/
+  components/Header/  → components/layout/Header/
+  components/Container.tsx → components/layout/Container.tsx
+
+Delete:
+  app/test/
+  components/PageLoader.tsx (broken)
+  assets/ (move used files to public/, delete the rest)
+
+Extract:
+  hooks/useIsMobile.ts  (used in 3 places)
+```
+
+
+┌─────────────────┬─────────────────┐
+│   HEADER (light background)       │
+├─────────────────┼─────────────────┤
+│           (light bg)              │
+│   DARK          │   TEXT          │
+|-----------------------------------|
+│   (image later) │   right side    │
+│              (darkbg)             │
+└─────────────────┴─────────────────┘

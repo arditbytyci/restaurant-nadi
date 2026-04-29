@@ -1,8 +1,8 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React from "react";
 
 type ImageProps = {
-  imageSource: any;
+  imageSource: string;
 };
 
 const ImageContainer = ({ imageSource }: ImageProps) => {
@@ -10,6 +10,8 @@ const ImageContainer = ({ imageSource }: ImageProps) => {
     <div className="w-[80vw] h-[140vw] xl:w-[30vw] xl:h-[50vw]   flex items-center ">
       <Image
         src={imageSource}
+        width={800}
+        height={1200}
         className="h-auto w-auto rounded-xl"
         alt="alt text goes here"
         priority

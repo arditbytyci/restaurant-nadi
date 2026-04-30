@@ -3,7 +3,12 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ImageContainer from "./SliderItem";
 
-const One = "/image_restaurant.jpg";
+const One = "/sliderpictures/photo01.jpg";
+const two = "/sliderpictures/photo02.jpg";
+const three = "/sliderpictures/photo03.jpg";
+const four = "/sliderpictures/photo04.jpg";
+const five = "/sliderpictures/photo05.jpg";
+const six = "/sliderpictures/photo06.jpg";
 
 export const Slider = () => {
   const targetRef = useRef(null);
@@ -25,10 +30,12 @@ export const Slider = () => {
         >
           <ImageContainer imageSource={One} />
 
-          <ImageContainer imageSource={One} />
+          <ImageContainer imageSource={two} />
 
-          <ImageContainer imageSource={One} />
-          <ImageContainer imageSource={One} />
+          <ImageContainer imageSource={three} />
+          <ImageContainer imageSource={four} />
+          <ImageContainer imageSource={five} />
+          <ImageContainer imageSource={six} />
         </motion.div>
       </div>
     </div>

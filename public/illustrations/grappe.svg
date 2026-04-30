@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Decanter/bottle -->
+  <path d="M42 95 Q34 92 33 82 L35 55 Q35 50 40 46 L40 32 Q40 28 45 26 L55 26 Q60 28 60 32 L60 46 Q65 50 65 55 L67 82 Q66 92 58 95 Z" stroke-width="2.2"/>
+  <!-- Bottle neck -->
+  <rect x="43" y="16" width="14" height="12" rx="3" stroke-width="2"/>
+  <!-- Cork/stopper -->
+  <path d="M41 16 Q50 12 59 16 L59 20 Q50 24 41 20 Z" stroke-width="1.8"/>
+  <!-- Bottle label -->
+  <rect x="35" y="58" width="30" height="28" rx="2" stroke-width="1.5"/>
+  <line x1="35" y1="66" x2="65" y2="66" stroke-width="1"/>
+  <line x1="38" y1="71" x2="62" y2="71" stroke-width="0.8"/>
+  <line x1="38" y1="76" x2="62" y2="76" stroke-width="0.8"/>
+  <!-- Decorative element on label -->
+  <path d="M50 62 L51.5 59 L53 62 L56 62 L54 64 L55 67 L52 65 L49 67 L50 64 L48 62 Z" stroke-width="1"/>
+  <!-- Liquid level in bottle -->
+  <path d="M36 52 Q50 49 64 52" stroke-width="1" opacity="0.5"/>
+  <!-- Shot glass right -->
+  <path d="M74 75 L78 110 Q78 114 82 114 L94 114 Q98 114 98 110 L102 75 Z" stroke-width="2"/>
+  <!-- Shot glass rim -->
+  <path d="M72 75 Q88 71 104 75" stroke-width="1.8"/>
+  <!-- Liquid in shot glass -->
+  <path d="M76 82 Q88 79 100 82" stroke-width="1" opacity="0.6"/>
+  <!-- Small glass left -->
+  <path d="M8 80 L11 108 Q11 112 15 112 L24 112 Q28 112 28 108 L31 80 Z" stroke-width="1.8"/>
+  <path d="M6 80 Q19 76 33 80" stroke-width="1.5"/>
+  <!-- Liquid in small glass -->
+  <path d="M9 87 Q19 84 29 87" stroke-width="1" opacity="0.5"/>
+  <!-- Pouring arc from bottle -->
+  <path d="M60 50 Q72 52 76 68" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Grape cluster decoration -->
+  <circle cx="100" cy="30" r="4" stroke-width="1.5"/>
+  <circle cx="108" cy="28" r="4" stroke-width="1.5"/>
+  <circle cx="104" cy="20" r="4" stroke-width="1.5"/>
+  <circle cx="96" cy="22" r="4" stroke-width="1.5"/>
+  <circle cx="112" cy="20" r="3" stroke-width="1.3"/>
+  <circle cx="100" cy="14" r="3" stroke-width="1.3"/>
+  <circle cx="108" cy="14" r="3" stroke-width="1.3"/>
+  <!-- Grape vine -->
+  <path d="M96 34 Q94 28 98 22 Q102 16 106 10" stroke-width="1.5"/>
+  <path d="M100 28 Q96 24 98 18" stroke-width="1"/>
+  <path d="M100 28 Q104 24 102 18" stroke-width="1"/>
+</svg>

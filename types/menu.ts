@@ -7,6 +7,7 @@ export type Category = {
   id: string;
   title: string;
   desc?: string;
+  illustration?: string;
   sides?: SideItem[];
   extras?: SideItem[];
 };

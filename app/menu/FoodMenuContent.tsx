@@ -1,7 +1,8 @@
 import { categories } from "@/data/categories";
 import MenuItem from "./MenuItem";
 import MenuSection from "./MenuSection";
-import { menuItems } from "@/data/menu";
+import { menuItems } from "@/data/food";
+import AllergenLegend from "./AllergenLegend";
 
 const FoodMenuContent = () => {
   const categoryList = Object.values(categories);
@@ -10,6 +11,10 @@ const FoodMenuContent = () => {
   };
   return (
     <div className="flex flex-col lg:space-y-20">
+      <p className="text-center">
+        [*] I numeri tra parentesi quadre indicano gli allergeni. Consultare la
+        legenda allergeni in fondo alla pagina.
+      </p>
       {categoryList.map((category) => {
         const items = menuItems.filter(
           (item) => item.category.id === category.id,
@@ -21,6 +26,7 @@ const FoodMenuContent = () => {
           <MenuSection
             key={category.id}
             title={formatText(category.title)}
+            illustration={category.illustration}
             desc={category.desc}
             sides={category.sides}
             extras={category.extras}
@@ -39,6 +45,8 @@ const FoodMenuContent = () => {
           </MenuSection>
         );
       })}
+
+      <AllergenLegend />
     </div>
   );
 };

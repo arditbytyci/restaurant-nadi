@@ -1,55 +1,46 @@
+import { categories } from "@/data/categories";
+import { menuItems } from "@/data/food";
 import MenuItem from "./MenuItem";
 import MenuSection from "./MenuSection";
+import { drinkItems } from "@/data/drinks";
 
 const DrinksMenuContent = () => {
+  const categoryList = Object.values(categories);
+  const formatText = (text: string) => {
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  };
   return (
-    <div className="flex flex-col gap-10">
-      {/* <MenuSection title="Wine">
-        <MenuItem
-          name="Hisari Red"
-          price={18.5}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
+    <div className="flex flex-col lg:space-y-20">
+      {categoryList.map((category) => {
+        const items = drinkItems.filter(
+          (item) => item.category.id === category.id,
+        );
 
-        <MenuItem
-          name="Hisari White"
-          price={16.6}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
-        <MenuItem
-          name="Chardonney"
-          price={20}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
-        <MenuItem
-          name="She Red"
-          price={3}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
-        <MenuItem
-          name="She white"
-          price={3}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
-      </MenuSection>
-      <MenuSection title="Beer">
-        <MenuItem
-          name="Peroni"
-          price={4}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
+        if (items.length === 0) return null;
 
-        <MenuItem
-          name="Moretti"
-          price={5}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
-        <MenuItem
-          name="Heineken"
-          price={6}
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit."
-        />
-      </MenuSection> */}
+        return (
+          <MenuSection
+            key={category.id}
+            title={formatText(category.title)}
+            illustration={category.illustration}
+            desc={category.desc}
+            sides={category.sides}
+            extras={category.extras}
+          >
+            {items.map((i) => (
+              <MenuItem
+                key={i.id}
+                id={i.id}
+                name={i.name}
+                price={i.price}
+                description={i.description}
+                allergen={i.allergen}
+                size={i.size}
+              />
+            ))}
+          </MenuSection>
+        );
+      })}
     </div>
   );
 };

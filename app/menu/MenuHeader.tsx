@@ -2,33 +2,16 @@
 
 import { motion } from "framer-motion";
 
-import { useRef } from "react";
 interface MenuHeaderProps {
   mode: "eat" | "drink";
   onToggle: () => void;
 }
 
-// const flipVariants = {
-//   initial: { rotateX: 90, opacity: 0 },
-//   animate: { rotateX: 0, opacity: 1 },
-//   exit: { rotateX: -90, opacity: 0, filter: "blur(1px)" },
-// };
-
 const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
-  // const headerRef = useRef<HTMLHeadingElement>(null);
-
-  // const [headerWidth, setHeaderWidth] = useState<number>(0);
-
-  // useEffect(() => {
-  //   if (headerRef.current) {
-  //     setHeaderWidth(headerRef.current.scrollWidth);
-  //   }
-  // }, [mode]);
-
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center gap-6">
       <motion.header
-        className="font-edlavonia w-auto text-4xl whitespace-nowrap lg:text-7xl py-12"
+        className="font-edlavonia text-center text-3xl lg:text-7xl py-6 lg:py-12"
         layout
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -36,7 +19,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
       >
         What to{" "}
         <motion.span
-          className="inline-block  bg-secondary rounded-full px-4 text-primary"
+          className="inline-block bg-secondary rounded-full px-4 text-primary"
           key={mode}
           animate={{ rotateX: 0, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
@@ -45,8 +28,9 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
         </motion.span>{" "}
         at Nadi
       </motion.header>
+
       <motion.button
-        className="font-edlavonia text-xl lg:text-5xl w-xs rounded-full py-4 px-6 bg-secondary text-primary underline underline-offset-4 border"
+        className="font-edlavonia text-lg lg:text-4xl w-full max-w-xs lg:max-w-md rounded-full py-3 px-6 bg-secondary text-primary underline underline-offset-4"
         layout
         onClick={onToggle}
         initial={{ y: -30, opacity: 0 }}

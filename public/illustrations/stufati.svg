@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Pot body -->
+  <path d="M25 55 Q24 50 28 48 L92 48 Q96 50 95 55 L90 92 Q89 97 84 98 L36 98 Q31 97 30 92 Z" stroke-width="2.2"/>
+  <!-- Pot handles -->
+  <path d="M25 58 Q14 58 12 50 Q10 42 20 40" stroke-width="2"/>
+  <path d="M95 58 Q106 58 108 50 Q110 42 100 40" stroke-width="2"/>
+  <!-- Lid -->
+  <path d="M22 55 Q21 50 26 48 L94 48 Q99 50 98 55 L97 60 Q96 64 91 64 L29 64 Q24 64 23 60 Z" stroke-width="2"/>
+  <!-- Lid handle -->
+  <path d="M52 48 Q52 42 56 40 Q60 38 64 40 Q68 42 68 48" stroke-width="1.8"/>
+  <ellipse cx="60" cy="40" rx="6" ry="3" stroke-width="1.8"/>
+  <!-- Steam from lid gap -->
+  <path d="M35 47 Q33 40 36 33 Q38 27 35 21" stroke-width="1.4"/>
+  <path d="M60 46 Q62 39 59 32 Q57 26 60 20" stroke-width="1.4"/>
+  <path d="M85 47 Q87 40 84 33 Q82 27 85 21" stroke-width="1.4"/>
+  <!-- Pot texture -->
+  <path d="M32 72 Q60 70 88 72" stroke-width="1" opacity="0.5"/>
+  <path d="M31 80 Q60 78 89 80" stroke-width="1" opacity="0.5"/>
+  <path d="M32 88 Q60 86 88 88" stroke-width="1" opacity="0.5"/>
+  <!-- Rivets on pot -->
+  <circle cx="28" cy="70" r="2.5" stroke-width="1.5"/>
+  <circle cx="92" cy="70" r="2.5" stroke-width="1.5"/>
+  <!-- Flames beneath -->
+  <path d="M35 102 Q32 94 36 88 Q35 95 40 90 Q38 97 43 93 Q42 99 38 103" stroke-width="1.8"/>
+  <path d="M55 104 Q52 96 56 90 Q55 97 60 92 Q58 99 63 95 Q62 101 58 105" stroke-width="1.8"/>
+  <path d="M75 103 Q73 95 77 89 Q76 96 81 91 Q79 98 84 94 Q83 100 79 104" stroke-width="1.8"/>
+  <!-- Fire base -->
+  <path d="M28 108 Q60 104 92 108" stroke-width="2"/>
+  <!-- Cooking stand/trivet -->
+  <line x1="30" y1="108" x2="26" y2="116" stroke-width="2"/>
+  <line x1="60" y1="108" x2="60" y2="116" stroke-width="2"/>
+  <line x1="90" y1="108" x2="94" y2="116" stroke-width="2"/>
+  <path d="M22 116 Q60 112 98 116" stroke-width="2"/>
+  <!-- Bubbling contents visible through a crack -->
+  <path d="M45 64 Q48 60 52 64" stroke-width="1.2"/>
+  <path d="M66 63 Q69 59 73 63" stroke-width="1.2"/>
+</svg>

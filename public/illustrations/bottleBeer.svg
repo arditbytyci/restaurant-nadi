@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Left bottle -->
+  <path d="M28 100 Q22 98 22 90 L24 62 Q24 58 28 54 L28 42 Q28 38 32 38 L40 38 Q44 38 44 42 L44 54 Q48 58 48 62 L50 90 Q50 98 44 100 Z" stroke-width="2"/>
+  <!-- Left bottle neck -->
+  <rect x="30" y="28" width="12" height="12" rx="2" stroke-width="1.8"/>
+  <!-- Left bottle cap -->
+  <path d="M28 28 Q36 24 44 28 L44 32 Q36 36 28 32 Z" stroke-width="1.8"/>
+  <!-- Left bottle label -->
+  <rect x="24" y="65" width="24" height="22" rx="2" stroke-width="1.5"/>
+  <line x1="24" y1="72" x2="48" y2="72" stroke-width="1"/>
+  <line x1="27" y1="76" x2="45" y2="76" stroke-width="0.8"/>
+  <line x1="27" y1="80" x2="45" y2="80" stroke-width="0.8"/>
+  <!-- Left bottle liquid line -->
+  <path d="M24 60 Q36 58 48 60" stroke-width="1" opacity="0.5"/>
+  <!-- Right bottle (slightly different height) -->
+  <path d="M72 105 Q66 103 66 95 L68 65 Q68 61 72 57 L72 44 Q72 40 76 40 L84 40 Q88 40 88 44 L88 57 Q92 61 92 65 L94 95 Q94 103 88 105 Z" stroke-width="2"/>
+  <!-- Right bottle neck -->
+  <rect x="74" y="32" width="12" height="14" rx="2" stroke-width="1.8"/>
+  <!-- Right bottle cap -->
+  <path d="M72 32 Q80 28 88 32 L88 36 Q80 40 72 36 Z" stroke-width="1.8"/>
+  <!-- Right bottle label -->
+  <rect x="68" y="68" width="24" height="24" rx="2" stroke-width="1.5"/>
+  <line x1="68" y1="76" x2="92" y2="76" stroke-width="1"/>
+  <line x1="71" y1="80" x2="89" y2="80" stroke-width="0.8"/>
+  <line x1="71" y1="84" x2="89" y2="84" stroke-width="0.8"/>
+  <line x1="73" y1="88" x2="87" y2="88" stroke-width="0.8"/>
+  <!-- Small star on right label -->
+  <path d="M80 71 L81 68 L82 71 L85 71 L83 73 L84 76 L81 74 L78 76 L79 73 L77 71 Z" stroke-width="1"/>
+  <!-- Foam/fizz at top of left bottle -->
+  <path d="M30 38 Q36 34 42 38" stroke-width="1.2"/>
+  <!-- Condensation dots -->
+  <circle cx="26" cy="85" r="1" stroke-width="1"/>
+  <circle cx="46" cy="88" r="1" stroke-width="1"/>
+  <circle cx="70" cy="90" r="1" stroke-width="1"/>
+  <circle cx="90" cy="86" r="1" stroke-width="1"/>
+  <!-- Small bubbles in bottle -->
+  <circle cx="36" cy="75" r="1.2" stroke-width="1"/>
+  <circle cx="80" cy="78" r="1.2" stroke-width="1"/>
+</svg>

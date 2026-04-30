@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Cutting board -->
+  <path d="M15 35 Q14 32 17 30 L95 22 Q99 21 100 25 L108 85 Q109 89 105 90 L27 98 Q23 99 22 95 Z" stroke-width="2.2"/>
+  <!-- Board grain lines -->
+  <path d="M25 40 Q60 36 98 30" stroke-width="0.8" opacity="0.5"/>
+  <path d="M26 52 Q62 48 99 42" stroke-width="0.8" opacity="0.5"/>
+  <path d="M28 64 Q63 60 100 54" stroke-width="0.8" opacity="0.5"/>
+  <!-- Bread slice -->
+  <path d="M30 55 Q29 45 38 42 Q50 38 58 42 Q65 45 63 55 L60 75 Q59 78 56 78 L35 81 Q32 81 31 78 Z" stroke-width="2"/>
+  <!-- Bread crust top -->
+  <path d="M30 55 Q38 48 58 42 Q65 45 63 55" stroke-width="1.5"/>
+  <!-- Bread texture -->
+  <path d="M36 58 Q44 55 55 57" stroke-width="1" opacity="0.6"/>
+  <path d="M35 64 Q45 61 57 63" stroke-width="1" opacity="0.6"/>
+  <path d="M36 70 Q46 68 56 70" stroke-width="1" opacity="0.6"/>
+  <!-- Small bowl -->
+  <path d="M68 58 Q66 54 70 52 L84 50 Q88 49 89 53 L88 62 Q88 66 84 67 L71 69 Q67 70 67 66 Z" stroke-width="1.8"/>
+  <!-- Bowl contents (spread) -->
+  <path d="M70 57 Q78 54 87 56" stroke-width="1.2" opacity="0.7"/>
+  <ellipse cx="78" cy="59" rx="7" ry="4" stroke-width="1" opacity="0.5"/>
+  <!-- Olives -->
+  <ellipse cx="72" cy="80" rx="4" ry="3" stroke-width="1.8" transform="rotate(-15 72 80)"/>
+  <line x1="72" y1="77" x2="72" y2="74" stroke-width="1.2"/>
+  <ellipse cx="83" cy="77" rx="4" ry="3" stroke-width="1.8" transform="rotate(10 83 77)"/>
+  <line x1="83" y1="74" x2="84" y2="71" stroke-width="1.2"/>
+  <ellipse cx="93" cy="82" rx="4" ry="3" stroke-width="1.8" transform="rotate(-5 93 82)"/>
+  <line x1="93" y1="79" x2="93" y2="76" stroke-width="1.2"/>
+  <!-- Knife -->
+  <path d="M100 35 L108 15" stroke-width="2"/>
+  <path d="M100 35 Q97 38 99 41 L106 34 Q108 31 105 30 Z" stroke-width="1.5"/>
+  <line x1="102" y1="32" x2="107" y2="18" stroke-width="1"/>
+  <!-- Herbs/garnish -->
+  <path d="M18 75 Q22 68 20 62" stroke-width="1.2"/>
+  <path d="M20 62 Q17 58 22 55" stroke-width="1"/>
+  <path d="M20 62 Q24 58 21 54" stroke-width="1"/>
+  <path d="M18 75 Q15 70 18 66" stroke-width="1"/>
+</svg>

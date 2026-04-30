@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Baklava slice - diamond shape -->
+  <path d="M60 18 L95 55 L60 92 L25 55 Z" stroke-width="2.2"/>
+  <!-- Phyllo layers visible from side -->
+  <path d="M25 55 L60 18" stroke-width="1.2"/>
+  <path d="M95 55 L60 18" stroke-width="1.2"/>
+  <!-- Layer lines on face -->
+  <path d="M38 37 Q60 30 82 37" stroke-width="1"/>
+  <path d="M33 43 Q60 35 87 43" stroke-width="1"/>
+  <path d="M29 49 Q60 41 91 49" stroke-width="1"/>
+  <path d="M27 55 Q60 47 93 55" stroke-width="1.2"/>
+  <path d="M29 61 Q60 53 91 61" stroke-width="1"/>
+  <path d="M33 67 Q60 59 87 67" stroke-width="1"/>
+  <path d="M38 73 Q60 65 82 73" stroke-width="1"/>
+  <!-- Nut filling visible at center -->
+  <path d="M48 55 Q60 50 72 55 Q60 60 48 55Z" stroke-width="1.5"/>
+  <!-- Honey drip from top -->
+  <path d="M60 18 Q62 10 58 5" stroke-width="1.5"/>
+  <path d="M58 5 Q56 2 58 0" stroke-width="1.2"/>
+  <!-- Honey drips on sides -->
+  <path d="M78 36 Q82 40 80 46 Q79 50 82 54" stroke-width="1.3"/>
+  <path d="M42 36 Q38 40 40 46 Q41 50 38 54" stroke-width="1.3"/>
+  <!-- Small baklava pieces around -->
+  <path d="M8 40 L18 52 L8 64 L-2 52 Z" stroke-width="1.5"/>
+  <path d="M102 40 L112 52 L102 64 L92 52 Z" stroke-width="1.5"/>
+  <!-- Layer lines on small pieces -->
+  <path d="M4 52 Q8 46 12 52 Q8 58 4 52Z" stroke-width="1"/>
+  <path d="M98 52 Q102 46 106 52 Q102 58 98 52Z" stroke-width="1"/>
+  <!-- Pistachios on top -->
+  <ellipse cx="55" cy="52" rx="3" ry="2" stroke-width="1.5" transform="rotate(-15 55 52)"/>
+  <ellipse cx="65" cy="52" rx="3" ry="2" stroke-width="1.5" transform="rotate(20 65 52)"/>
+  <ellipse cx="60" cy="48" rx="3" ry="2" stroke-width="1.5" transform="rotate(-5 60 48)"/>
+  <!-- Decorative dots for nuts -->
+  <circle cx="55" cy="58" r="1.5" stroke-width="1.2"/>
+  <circle cx="60" cy="60" r="1.5" stroke-width="1.2"/>
+  <circle cx="65" cy="58" r="1.5" stroke-width="1.2"/>
+  <!-- Honey pool at base -->
+  <path d="M30 88 Q60 96 90 88 Q80 100 60 104 Q40 100 30 88Z" stroke-width="1.5"/>
+  <path d="M35 92 Q60 98 85 92" stroke-width="1" opacity="0.6"/>
+  <!-- Decorative swirl -->
+  <path d="M10 100 Q14 92 18 96 Q22 100 18 106 Q14 110 10 106 Q8 102 10 100" stroke-width="1.2"/>
+  <path d="M102 100 Q106 92 110 96 Q114 100 110 106 Q106 110 102 106 Q100 102 102 100" stroke-width="1.2"/>
+</svg>

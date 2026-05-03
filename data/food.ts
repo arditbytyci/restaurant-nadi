@@ -212,7 +212,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: "seg-02",
-    name: "LA GENUINITÀ DELLE PATATE (TAVË ME KOMPIRA)",
+    name: "LA GENUINITÀ DELLE PATATE (TAVË ME PATATE)",
     price: 4.5,
     allergen: [3, 9],
     description:

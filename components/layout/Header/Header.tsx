@@ -49,6 +49,20 @@ export const Header: React.FC = () => {
   const isFixed = pathname.startsWith("/about");
   const lenis = useLenis();
 
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="theme-color"]');
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.setAttribute("name", "theme-color");
+      document.head.appendChild(meta);
+    }
+
+    meta.setAttribute("content", isMenuOpen ? "#450b1d" : "#ffeedf");
+  }, [isMenuOpen]);
+
   // Pre-warm Framer Motion on mount
   useEffect(() => {
     const a = animate(0, 1, { duration: 0.01 });
@@ -87,23 +101,34 @@ export const Header: React.FC = () => {
 
   // Lock scroll when menu is open
   useEffect(() => {
-    if (!lenis) return;
     if (isMenuOpen) {
-      lenis.stop();
+      lenis?.stop();
+
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
     } else {
-      lenis.start();
+      lenis?.start();
+
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
     }
+
     return () => {
-      lenis.start();
+      lenis?.start();
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
     };
   }, [isMenuOpen, lenis]);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const buttonText = isMenuOpen ? "close" : "open";
-  const knifeColor = isMenuOpen ? "#ffeedf" : "#450b1d";
+  const knifeColor = isMenuOpen ? "#ffeedf" : "#ffeedf";
 
   return (
     <>
@@ -112,9 +137,9 @@ export const Header: React.FC = () => {
         ref={headerRef}
       >
         {/* Address — desktop only */}
-        <div className="hidden lg:flex lg:items-center ">
+        <div className="hidden lg:flex lg:items-center">
           <p
-            className={`text-xl max-w-1/2 ${isMenuOpen ? "text-primary" : "text-secondary"}`}
+            className={`text-xl max-w-1/2 ${isMenuOpen ? "text-primary" : "text-primary"}`}
           >
             Via Tommaso da Modena 1/b Roncade (TV)
           </p>
@@ -124,7 +149,7 @@ export const Header: React.FC = () => {
         <div className="flex justify-center">
           <div className="relative h-32 md:h-28 lg:h-45 w-32 md:w-28 lg:w-45">
             <Image
-              src="/logov2.png"
+              src="/logo-white.png"
               fill
               alt="Restaurant Nadi logo"
               className={`object-contain transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
@@ -156,7 +181,7 @@ export const Header: React.FC = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className={`sm:text-base lg:text-xl inline-flex ${isMenuOpen ? "text-primary" : "text-secondary"}`}
+                className={`sm:text-base lg:text-xl inline-flex font-extralight ${isMenuOpen ? "text-primary" : "text-primary"}`}
               >
                 {buttonText.split("").map((char, i) => (
                   <motion.span

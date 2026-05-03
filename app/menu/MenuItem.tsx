@@ -29,7 +29,7 @@ const MenuItem = ({
             {/* <span className="font-bold  text-[2.5svh] lg:text-[4svh] shrink-0">
               —
             </span> */}
-            <p className="text-[2.5svh] lg:text-[4svh] font-semibold shrink-0">
+            <p className="text-[2.5svh] lg:text-[4svh] font-normal shrink-0">
               € {price}
             </p>
           </>

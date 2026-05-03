@@ -1,71 +1,76 @@
-import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { Facebook, Instagram, Location, Clock } from "@/components/icons";
 
 export const Footer = () => {
   return (
-    <footer className="min-h-[100svh] grid grid-rows-[auto_1fr_auto]">
-      {/* Logo */}
-      <Container className="flex items-center justify-center py-6">
-        <Image
-          src="/logo-hr.png"
-          width={230}
-          height={230}
-          alt="Restaurant Nadi logo"
-          className="w-auto sm:h-36 lg:h-48"
-        />
-      </Container>
+    <footer className="bg-secondary text-background mt-20">
+      <Container className="py-14 lg:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr] lg:items-start">
+            {/* Brand */}
+            <div>
+              <p className="mb-4 text-xs uppercase tracking-[0.45em] text-background/50">
+                Restaurant Nadi
+              </p>
 
-      {/* Info — location + hours */}
-      <Container className="flex flex-col lg:flex-row items-center justify-around gap-14 py-10">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <Location />
-          <p className="text-xl sm:text-2xl md:text-3xl font-light leading-relaxed">
-            Via Tommaso da Modena 1/b Roncade (TV)
-          </p>
-          <a
-            href="https://maps.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-4 text-lg sm:text-xl"
-          >
-            View on maps
-          </a>
-        </div>
+              <h2 className="max-w-xl text-2xl font-light uppercase leading-tight tracking-[0.18em] lg:text-4xl">
+                Sapori balcanici a Roncade
+              </h2>
+            </div>
 
-        <div className="flex flex-col items-center gap-6 text-center">
-          <Clock />
-          <div className="flex flex-col gap-2 text-xl sm:text-2xl lg:text-3xl">
-            <p>
-              Mon – Fri: <span className="font-edlavonia">9:00 – 21:00</span>
+            {/* Address */}
+            <div className="flex flex-col gap-4 font-light text-background/75">
+              <div className="text-background/70">
+                <Location />
+              </div>
+
+              <p className="text-base leading-relaxed lg:text-lg">
+                Via Tommaso da Modena 1/b
+                <br />
+                Roncade (TV)
+              </p>
+
+              <a
+                href="https://maps.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-fit border-b border-background/30 pb-1 text-xs uppercase tracking-[0.28em] transition hover:border-background hover:text-background"
+              >
+                Apri mappa
+              </a>
+            </div>
+
+            {/* Hours */}
+            <div className="flex flex-col gap-4 font-light text-background/75">
+              <div className="text-background/70">
+                <Clock />
+              </div>
+
+              <div className="space-y-1 text-base leading-relaxed lg:text-lg">
+                <p>Lun – Ven · 9:00 – 21:00</p>
+                <p>Sab – Dom · 9:00 – 22:00</p>
+              </div>
+
+              <p className="text-sm text-background/50">+39 000 000 000</p>
+            </div>
+          </div>
+
+          <div className="my-10 h-px w-full bg-background/15" />
+
+          {/* Bottom */}
+          <div className="flex flex-col gap-6 text-background/50 lg:flex-row lg:items-center lg:justify-between">
+            <p className="text-xs uppercase tracking-[0.3em]">
+              © Restaurant Nadi
             </p>
-            <p>
-              Sat – Sun: <span className="font-edlavonia">9:00 – 22:00</span>
-            </p>
+
+            <div className="flex items-center gap-6">
+              <Facebook />
+              <Instagram />
+            </div>
+
+            <p className="text-sm font-light">restaurant@gmail.com</p>
           </div>
         </div>
-      </Container>
-
-      {/* Bottom bar — socials + contact */}
-      <Container className="flex flex-col items-center gap-6 py-6">
-        <div className="flex flex-row items-center justify-between w-full">
-          <div className="flex flex-row gap-6">
-            <Facebook />
-            <Instagram />
-          </div>
-          <div className="text-right">
-            <p className="text-base sm:text-xl lg:text-3xl">+39 000 000 000</p>
-            <p className="text-sm sm:text-base lg:text-2xl">
-              restaurant@gmail.com
-            </p>
-          </div>
-        </div>
-
-        <hr className="w-full border-b border-current opacity-20" />
-
-        <p className="font-edlavonia text-2xl sm:text-3xl md:text-4xl tracking-wider py-4">
-          © Restaurant Nadi
-        </p>
       </Container>
     </footer>
   );

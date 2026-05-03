@@ -33,10 +33,17 @@
   font-family: var(--font-ed-lavonia);
 }
 
+html {
+  background: var(--background);
+  min-height: 100%;
+}
+
 body {
+  min-height: 100%;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-poppins);
+  overscroll-behavior: none;
 }
 
 * {
@@ -51,4 +58,9 @@ body {
 /* Set header height variable */
 :root {
   --header-height: 120px; /* Adjust based on your actual header height */
+}
+
+#__next {
+  min-height: 100%;
+  background: var(--background);
 }

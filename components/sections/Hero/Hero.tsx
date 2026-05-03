@@ -1,64 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Link } from "next-view-transitions";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 
 export const Hero: React.FC = () => {
   return (
-    <section className="min-h-svh grid grid-rows-2 lg:pt-[var(--header-height)]">
-      {/* Top half — light bg */}
+    <section className="relative h-[100dvh] overflow-hidden">
+      <Image
+        src="/hdr1.jpg"
+        alt="Restaurant outdoor terrace"
+        fill
+        priority
+        sizes="100vw"
+        quality={100}
+        className="object-cover"
+      />
 
-      <div className="grid sm:grid-rows-1 lg:grid-cols-2 ">
-        {/* Top left — light, empty (image later) */}
-        <div className="bg-primary flex items-center  justify-center">
-          {/* image goes here */}
+      <div className="absolute inset-0 bg-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
+
+      <Container>
+        <div className="relative z-10 flex h-[100dvh] flex-col items-center justify-around pt-[var(--header-height)] text-center text-white">
+          <h1 className="max-w-5xl text-[13vw] font-thin uppercase leading-none tracking-[0.18em] sm:text-[10vw] lg:text-[6vw]">
+            Sapori Balcanici
+          </h1>
+
+          <a
+            href="#menu"
+            className="mt-8 uppercase font-extralight tracking-[0.4em] text-xl lg:text-[10svh] text-white border-b border-white/50 pb-1 hover:border-white"
+          >
+            Il Menù
+          </a>
         </div>
-
-        {/* Top right — light, big dark text */}
-        <Container className="bg-primary flex flex-col justify-end items-end">
-          <motion.h1
-            initial={{ x: 60, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="font-edlavonia leading-tight text-5xl lg:text-[68px] text-secondary text-right"
-          >
-            Authentic Balkan Flavors,
-            <span className="block font-poppins font-semibold text-4xl lg:text-6xl">
-              Made with Love
-            </span>
-          </motion.h1>
-        </Container>
-      </div>
-
-      {/* Bottom half — dark bg */}
-      <div className="grid grid-rows-1 lg:grid-cols-2 ">
-        {/* Bottom left — dark, empty (image later) */}
-        <div className="bg-secondary hidden lg:flex items-center justify-center">
-          {/* image goes here */}
-        </div>
-
-        {/* Bottom right — dark, small light text */}
-        <Container className="bg-secondary flex flex-col  justify-start items-start p-4  ">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="text-primary leading-relaxed font-light text-xl lg:text-[28px] text-right"
-          >
-            Discover the rich taste of traditional Balkan cuisine, crafted with
-            fresh ingredients and passion. From sizzling grilled meats to
-            homemade specialties, every dish tells a story.
-          </motion.p>
-
-          {/* <Link
-            href="/menu"
-            className="text-primary text-xl underline underline-offset-8 text-right"
-          >
-            View menu
-          </Link> */}
-        </Container>
-      </div>
+      </Container>
     </section>
   );
 };

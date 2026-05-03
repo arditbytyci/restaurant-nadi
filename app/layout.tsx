@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["200", "400", "600", "700"],
+  weight: ["100", "200", "400", "600", "700"],
   variable: "--font-poppins",
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${poppins.variable} ${edLavonia.variable}`}>
-      <body className="font-sans antialiased ">
+      <body className="bg-background font-sans antialiased ">
         <Providers>
           <Header />
           <main className="">{children}</main>

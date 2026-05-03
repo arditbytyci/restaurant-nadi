@@ -1,15 +1,13 @@
-import { animate, AnimatePresence } from "framer-motion";
+"use client";
+
+import { animate, motion } from "framer-motion";
 import { Link } from "next-view-transitions";
-import { motion } from "framer-motion";
-
 import Image from "next/image";
-import { Facebook, Instagram } from "@/components/icons";
-
 import { useEffect } from "react";
+import { Facebook, Instagram } from "@/components/icons";
 
 interface MenuModalProps {
   isOpen: boolean;
-  headerHeight?: number;
   onClose: () => void;
 }
 
@@ -19,17 +17,14 @@ const links = [
   { href: "/about", label: "About" },
 ];
 
-export const MenuModal: React.FC<MenuModalProps> = ({
-  isOpen,
-  // headerHeight,
-  onClose,
-}) => {
+export const MenuModal: React.FC<MenuModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     const cleanup = animate(0, 0.001, {
       type: "spring",
       stiffness: 200,
       damping: 20,
     });
+
     return cleanup.stop;
   }, []);
 
@@ -42,66 +37,44 @@ export const MenuModal: React.FC<MenuModalProps> = ({
           : { opacity: 0, pointerEvents: "none" }
       }
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      style={{ height: "100%" }}
-      className="absolute inset-0 z-40 overflow-y-hidden h-full w-full bg-secondary flex flex-col items-center justify-around"
+      className="fixed inset-0 z-40 h-[100dvh] w-full overflow-hidden bg-secondary text-primary"
     >
-      <div className="min-h-[100svh] w-full pt-[var(--header-height)] grid grid-cols-[1fr] lg:grid-cols-[1fr_1fr_1fr]">
-        <div className="hidden lg:flex lg:flex-col lg:items-center lg:justify-around py-8 opacity-50">
-          <div className="w-96 aspect-[4/5] relative">
-            <Image
-              src="/grill.jpg"
-              alt="grill_photo"
-              fill
-              className="object-fill rounded-2xl"
-              quality={80}
-              priority
-            />
-          </div>
-          <p className="text-primary text-4xl">Text here!</p>
-        </div>
-
-        <div>
-          <div className="flex flex-col items-center justify-evenly lg:justify-center lg:space-y-16 py-6 lg:pt-0 h-full">
-            {links.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={false}
-                animate={isOpen ? { y: 0, opacity: 1 } : { y: -30, opacity: 0 }}
-                transition={{
-                  delay: isOpen ? index * 0.08 : 0,
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 20,
-                }}
+      <div className="flex h-[100dvh] flex-col px-6 pt-[var(--header-height)]">
+        <nav className="flex flex-1 flex-col items-center justify-center gap-8">
+          {links.map((link, index) => (
+            <motion.div
+              key={link.href}
+              initial={false}
+              animate={isOpen ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
+              transition={{
+                delay: isOpen ? index * 0.07 : 0,
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+              }}
+            >
+              <Link
+                href={link.href}
+                onClick={onClose}
+                className="text-3xl font-light uppercase tracking-[0.28em] transition hover:opacity-70 sm:text-4xl lg:text-6xl"
               >
-                <Link
-                  href={link.href}
-                  onClick={onClose}
-                  className="text-4xl md:text-4xl lg:text-8xl text-primary font-semibold uppercase tracking-widest hover:scale-105 transition-transform duration-300"
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-            <div className="flex flex-row items-center justify-center space-x-18">
-              <Instagram color="#ffeedf" height="18" width="auto" />
-              <Facebook color="#ffeedf" height="18" width="auto" />
-            </div>
-          </div>
-        </div>
+                {link.label}
+              </Link>
+            </motion.div>
+          ))}
+        </nav>
 
-        <div className="hidden lg:flex lg:flex-col lg:items-center lg:justify-around py-8 opacity-50">
-          <div className="w-96 aspect-[4/5] relative">
-            <Image
-              src="/wine.jpg"
-              alt="grill_photo"
-              fill
-              className="object-fill rounded-2xl"
-              quality={80}
-              priority
-            />
+        <div className="pb-8 text-center">
+          <p className="mb-6 text-[10px] uppercase tracking-[0.3em] text-primary/50">
+            Sapori balcanici · tradizione · accoglienza
+          </p>
+
+          <div className="mx-auto mb-6 h-px w-20 bg-primary/25" />
+
+          <div className="flex items-center justify-center gap-8 opacity-75">
+            <Instagram color="#ffeedf" height="18" width="auto" />
+            <Facebook color="#ffeedf" height="18" width="auto" />
           </div>
-          <p className="text-primary text-4xl">Text here!</p>
         </div>
       </div>
     </motion.div>

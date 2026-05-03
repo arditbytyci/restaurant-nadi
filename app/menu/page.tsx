@@ -12,7 +12,7 @@ const MenuPage: React.FC = () => {
   const [mode, setMode] = useState<"eat" | "drink">("eat");
 
   return (
-    <div className="min-h-svh relative py-8 pt-[var(--header-height)]">
+    <div className="min-h-dvh bg-background relative py-8 pt-[var(--header-height)]">
       <Container className="items-center justify-center flex flex-col gap-20">
         {/* Intro */}
         <div className="my-10 flex flex-col items-center gap-8 text-center">

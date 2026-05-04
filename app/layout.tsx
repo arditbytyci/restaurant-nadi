@@ -1,29 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import { Header } from "@/components/layout/Header/Header";
-
 import { edLavonia } from "@/app/fonts";
-
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Restaurant Nadi",
   description:
     "Authentic Balkan cuisine crafted with fresh ingredients and passion.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Restaurant Nadi",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#ffeedf", // default for menu/about (cream header)
 };
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "400", "600", "700"],
-  variable: "--font-poppins",
-});
 
 export default function RootLayout({
   children,
@@ -31,11 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${edLavonia.variable}`}>
-      <body className="bg-background font-sans antialiased ">
+    <html lang="en" className={edLavonia.variable}>
+      <body className="font-sans antialiased">
         <Providers>
           <Header />
-          <main className="">{children}</main>
+          <main>{children}</main>
         </Providers>
       </body>
     </html>

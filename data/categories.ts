@@ -17,10 +17,10 @@ storia. Godetevi questo inizio del viaggio.`,
 un’accoglienza che non finisce ma
 La nostra carne 100% manzo, da due tagli selezionati macinati.`,
   },
-  seggreti: {
+  segreti: {
     id: "seg-01",
     title: "I Segreti del Villaggio",
-    illustration: "/illustrations/seggreti.svg",
+    illustration: "/illustrations/segreti.svg",
     desc: `"Le radici del nostro sapore: le basi calde che profumano di casa e di tradizione.”
 Trasforma la tua griglia in un'esperienza unica: lascia che la carne si unisca al calore di queste ricette
 tipiche, preparate lentamente al forno proprio come facevano le nostre nonne. Tutte le basi vengono
@@ -64,15 +64,14 @@ Strati sovrapposti di pasta fillo, tirata a mano con pazienza infinita.`,
     illustration: "/illustrations/salads.svg",
     title: "LE NOSTE INSALATE: IL RESPIRO DELL'ORTO",
   },
-  deserts: {
+  desserts: {
     id: "dsrt-01",
     title: "DOLCI: I TESORI DELLA DOLCEZZA",
-    illustration: "/illustrations/deserts.svg",
+    illustration: "/illustrations/desserts.svg",
     desc: `Per queste specialità abbiamo scelto l'eccellenza di Burek_Time, che le prepara artigianalmente per noi per garantirvi il
 sapore più autentico.`,
   },
 
-  //// drinks
   draftBeer: {
     id: "dbeer-01",
     title: "LE NOSTRE BIRRE ALLA SPINA",
@@ -89,9 +88,9 @@ sapore più autentico.`,
     illustration: "/illustrations/drinks.svg",
     title: "LE BIBITE",
   },
-  apperitivi: {
+  aperitivi: {
     id: "appr-01",
-    illustration: "/illustrations/apperitivi.svg",
+    illustration: "/illustrations/aperitivi.svg",
     title: "APERITIVI & DRINK",
   },
   grappe: {
@@ -99,9 +98,9 @@ sapore più autentico.`,
     illustration: "/illustrations/grappe.svg",
     title: "GRAPPE & DISTILLATI",
   },
-  caffee: {
+  caffe: {
     id: "cffe-01",
-    illustration: "/illustrations/caffee.svg",
+    illustration: "/illustrations/caffe.svg",
     title: "CAFFETTERIA",
   },
   vinoSDC: {

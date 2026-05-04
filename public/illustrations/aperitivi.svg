@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Wine/Spritz glass left -->
+  <path d="M25 20 Q18 35 20 55 Q22 68 36 72 L34 100" stroke-width="2"/>
+  <path d="M65 20 Q72 35 70 55 Q68 68 54 72 L56 100" stroke-width="2"/>
+  <!-- Glass bowl connecting line at top -->
+  <path d="M25 20 Q45 15 65 20" stroke-width="2"/>
+  <!-- Glass stem base -->
+  <path d="M28 100 Q45 96 62 100" stroke-width="2"/>
+  <!-- Liquid level -->
+  <path d="M27 30 Q45 26 63 30" stroke-width="1.5"/>
+  <!-- Bubbles in spritz -->
+  <circle cx="38" cy="45" r="2" stroke-width="1.2"/>
+  <circle cx="50" cy="38" r="2" stroke-width="1.2"/>
+  <circle cx="58" cy="50" r="2" stroke-width="1.2"/>
+  <circle cx="32" cy="55" r="1.5" stroke-width="1"/>
+  <circle cx="45" cy="60" r="1.5" stroke-width="1"/>
+  <circle cx="55" cy="42" r="1.5" stroke-width="1"/>
+  <!-- Orange slice garnish on rim -->
+  <circle cx="68" cy="25" r="10" stroke-width="1.5"/>
+  <circle cx="68" cy="25" r="6" stroke-width="1"/>
+  <line x1="68" y1="15" x2="68" y2="35" stroke-width="0.8"/>
+  <line x1="58" y1="25" x2="78" y2="25" stroke-width="0.8"/>
+  <line x1="61" y1="18" x2="75" y2="32" stroke-width="0.8"/>
+  <line x1="61" y1="32" x2="75" y2="18" stroke-width="0.8"/>
+  <!-- Straw in glass -->
+  <line x1="52" y1="72" x2="72" y2="15" stroke-width="1.8"/>
+  <!-- Martini glass right -->
+  <path d="M78 95 L90 95" stroke-width="2.2"/>
+  <line x1="84" y1="40" x2="84" y2="95" stroke-width="2"/>
+  <path d="M60 40 L84 40 L108 40" stroke-width="2"/>
+  <path d="M60 40 Q66 55 72 62 Q78 68 84 68 Q90 68 96 62 Q102 55 108 40" stroke-width="2"/>
+  <!-- Martini liquid -->
+  <path d="M64 42 Q84 40 104 42" stroke-width="1" opacity="0.5"/>
+  <!-- Olive in martini -->
+  <ellipse cx="84" cy="55" rx="5" ry="3.5" stroke-width="1.8"/>
+  <line x1="84" y1="51" x2="84" y2="44" stroke-width="1.5"/>
+  <circle cx="84" cy="55" r="2" stroke-width="1"/>
+  <!-- Decorative dots/sparkles -->
+  <path d="M14 80 L15 76 L16 80 L20 80 L17 83 L18 87 L15 84 L12 87 L13 83 L10 80 Z" stroke-width="1.2"/>
+  <path d="M104 10 L105 7 L106 10 L109 10 L107 12 L108 15 L105 13 L102 15 L103 12 L101 10 Z" stroke-width="1"/>
+</svg>

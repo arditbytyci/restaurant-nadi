@@ -1,20 +1,22 @@
 import { categories } from "@/data/categories";
-import MenuItem from "./MenuItem";
-import MenuSection from "./MenuSection";
 import { menuItems } from "@/data/food";
 import AllergenLegend from "./AllergenLegend";
+import MenuItem from "./MenuItem";
+import MenuSection from "./MenuSection";
+
+const formatTitle = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 
 const FoodMenuContent = () => {
   const categoryList = Object.values(categories);
-  const formatText = (text: string) => {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  };
+
   return (
-    <div className="flex flex-col lg:space-y-20">
-      <p className="text-center">
+    <div className="flex flex-col space-y-14 lg:space-y-20">
+      <p className="text-center text-sm font-light lg:text-base">
         [*] I numeri tra parentesi quadre indicano gli allergeni. Consultare la
         legenda allergeni in fondo alla pagina.
       </p>
+
       {categoryList.map((category) => {
         const items = menuItems.filter(
           (item) => item.category.id === category.id,
@@ -25,21 +27,20 @@ const FoodMenuContent = () => {
         return (
           <MenuSection
             key={category.id}
-            title={formatText(category.title)}
+            title={formatTitle(category.title)}
             illustration={category.illustration}
             desc={category.desc}
             sides={category.sides}
             extras={category.extras}
           >
-            {items.map((i) => (
+            {items.map((item) => (
               <MenuItem
-                key={i.id}
-                id={i.id}
-                name={i.name}
-                price={i.price}
-                description={i.description}
-                allergen={i.allergen}
-                size={i.size}
+                key={item.id}
+                name={item.name}
+                price={item.price}
+                description={item.description}
+                allergen={item.allergen}
+                size={item.size}
               />
             ))}
           </MenuSection>
@@ -50,4 +51,5 @@ const FoodMenuContent = () => {
     </div>
   );
 };
+
 export default FoodMenuContent;

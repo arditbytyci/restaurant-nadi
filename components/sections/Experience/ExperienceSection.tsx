@@ -6,11 +6,10 @@ export const ExperienceSection = () => {
     <section className="bg-background text-secondary">
       <Container className="py-16 sm:py-20 lg:py-32">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:justify-around lg:gap-20">
-          {/* Image */}
           <div className="w-full flex justify-center lg:w-auto">
             <div className="relative aspect-[4/5] w-[78vw] max-w-[360px] overflow-hidden sm:max-w-[420px] lg:w-[450px] lg:max-w-none">
               <Image
-                src="/nadi_mami.jpg"
+                src="/restaurant-atmosphere.png"
                 alt="Guests enjoying drinks at Restaurant Nadi"
                 fill
                 sizes="(max-width: 640px) 78vw, (max-width: 1024px) 420px, 450px"
@@ -19,8 +18,6 @@ export const ExperienceSection = () => {
               />
             </div>
           </div>
-
-          {/* Text */}
           <div className="w-full max-w-xl text-center lg:text-left">
             <p className="mb-5 text-[10px] uppercase tracking-[0.4em] text-secondary/50 sm:tracking-[0.5em]">
               L’atmosfera

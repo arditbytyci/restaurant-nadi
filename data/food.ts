@@ -16,7 +16,6 @@ type SizedItem = MenuItemBase & { size: Size; price?: never };
 export type MenuItem = PricedItem | SizedItem;
 
 export const menuItems: MenuItem[] = [
-  // ANTIPASTI
   {
     id: "ant-01",
     name: "PEPERONI CON GJIZË",
@@ -90,7 +89,6 @@ export const menuItems: MenuItem[] = [
     category: categories.antipasti,
   },
 
-  // LA GRIGLIA
   {
     id: "gri-01",
     name: "NADI GRILL MIX (L'ESSENZA DEL VILLAGGIO)",
@@ -200,7 +198,6 @@ export const menuItems: MenuItem[] = [
     category: categories.griglia,
   },
 
-  // I SEGRETI DEL VILLAGGIO
   {
     id: "seg-01",
     name: "LA DOLCEZZA DEI POMODORI (TAVË ME DOMATE)",
@@ -208,7 +205,7 @@ export const menuItems: MenuItem[] = [
     allergen: [9],
     description:
       "Pomodori, peperoni e riso stufati al forno con cipolla, paprika dolce e aromi. Una base ricca e accogliente che custodisce i sapori di una volta.",
-    category: categories.seggreti,
+    category: categories.segreti,
   },
   {
     id: "seg-02",
@@ -217,7 +214,7 @@ export const menuItems: MenuItem[] = [
     allergen: [3, 9],
     description:
       "Patate e riso uniti in una cottura lenta al forno, profumati da cipolla e aromi di casa. Un piatto genuino e ricco di sapore.",
-    category: categories.seggreti,
+    category: categories.segreti,
   },
   {
     id: "seg-03",
@@ -226,7 +223,7 @@ export const menuItems: MenuItem[] = [
     allergen: [7, 9],
     description:
       "La nostra crema di panna leggermente sapida, insaporita con il nostro mix di spezie.",
-    category: categories.seggreti,
+    category: categories.segreti,
   },
   {
     id: "seg-04",
@@ -234,10 +231,9 @@ export const menuItems: MenuItem[] = [
     price: 4.5,
     allergen: [7, 9],
     description: "Ricotta e panna amalgamate con formaggio tipico e spezie.",
-    category: categories.seggreti,
+    category: categories.segreti,
   },
 
-  // I NOSTRI HAMBURGER
   {
     id: "bur-01",
     name: "NADI BURGER",
@@ -284,7 +280,6 @@ export const menuItems: MenuItem[] = [
     category: categories.hamburger,
   },
 
-  // IL PITE
   {
     id: "pit-01",
     name: "TRADIZIONE DORATA (GJIZË)",
@@ -322,7 +317,6 @@ export const menuItems: MenuItem[] = [
     category: categories.pite,
   },
 
-  // STUFATI
   {
     id: "stu-01",
     name: "PASUL (L'ABBRACCIO DELLA TRADIZIONE)",
@@ -342,7 +336,6 @@ export const menuItems: MenuItem[] = [
     category: categories.stufati,
   },
 
-  // MENÙ BAMBINI
   {
     id: "kid-01",
     name: "MINI NADI (4 QEBAPA)",
@@ -387,7 +380,6 @@ export const menuItems: MenuItem[] = [
     category: categories.bambini,
   },
 
-  // LE NOSTRE INSALATE
   {
     id: "sld-01",
     name: "INSALATA RUSTICA",
@@ -458,7 +450,6 @@ export const menuItems: MenuItem[] = [
     category: categories.salads,
   },
 
-  // DOLCI
   {
     id: "dsrt-01",
     name: "BAKLAVA (L'ORO DEI SULTANI)",
@@ -466,7 +457,7 @@ export const menuItems: MenuItem[] = [
     allergen: [1, 3, 7, 8],
     description:
       "Sottili strati di pasta fillo artigianale, noci e miele. Un classico croccante e senza tempo.",
-    category: categories.deserts,
+    category: categories.desserts,
   },
   {
     id: "dsrt-02",
@@ -475,7 +466,7 @@ export const menuItems: MenuItem[] = [
     allergen: [1, 3, 7, 8],
     description:
       "Soffice pan di spagna bagnato ai tre latti con un goloso strato di caramello. Una nuvola vellutata.",
-    category: categories.deserts,
+    category: categories.desserts,
   },
   {
     id: "dsrt-03",
@@ -484,6 +475,6 @@ export const menuItems: MenuItem[] = [
     allergen: [1, 3, 7, 8],
     description:
       "Dolce semplice e genuino che profuma di casa. Il calore della tradizione in ogni morso.",
-    category: categories.deserts,
+    category: categories.desserts,
   },
 ];

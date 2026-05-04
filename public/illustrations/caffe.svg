@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#450b1d" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Saucer -->
+  <ellipse cx="60" cy="95" rx="42" ry="10" stroke-width="2"/>
+  <ellipse cx="60" cy="95" rx="28" ry="6" stroke-width="1.2"/>
+  <!-- Espresso cup -->
+  <path d="M35 72 Q34 68 38 66 L82 66 Q86 68 85 72 L80 92 Q79 96 74 96 L46 96 Q41 96 40 92 Z" stroke-width="2.2"/>
+  <!-- Cup handle -->
+  <path d="M80 76 Q92 76 93 84 Q94 92 82 92" stroke-width="2"/>
+  <!-- Espresso crema on top -->
+  <ellipse cx="60" cy="66" rx="22" ry="6" stroke-width="2"/>
+  <!-- Crema texture swirl -->
+  <path d="M42 66 Q52 62 60 66 Q68 70 78 66" stroke-width="1.2"/>
+  <path d="M46 64 Q60 60 74 64" stroke-width="0.8" opacity="0.6"/>
+  <!-- Steam wisps -->
+  <path d="M48 60 Q46 52 49 45 Q51 39 48 32" stroke-width="1.5"/>
+  <path d="M60 58 Q62 50 59 43 Q57 37 60 30" stroke-width="1.5"/>
+  <path d="M72 60 Q74 52 71 45 Q69 39 72 32" stroke-width="1.5"/>
+  <!-- Coffee beans scattered -->
+  <path d="M10 45 Q14 40 18 45 Q14 50 10 45Z" stroke-width="1.8"/>
+  <line x1="14" y1="40" x2="14" y2="50" stroke-width="1"/>
+  <path d="M10 45 Q8 42 10 39 Q12 36 14 39" stroke-width="0" fill="#450b1d" opacity="0.1"/>
+  <path d="M22 58 Q26 53 30 58 Q26 63 22 58Z" stroke-width="1.8" transform="rotate(20 26 58)"/>
+  <line x1="26" y1="53" x2="26" y2="63" stroke-width="1" transform="rotate(20 26 58)"/>
+  <path d="M8 68 Q12 63 16 68 Q12 73 8 68Z" stroke-width="1.8" transform="rotate(-15 12 68)"/>
+  <line x1="12" y1="63" x2="12" y2="73" stroke-width="1" transform="rotate(-15 12 68)"/>
+  <path d="M90 40 Q94 35 98 40 Q94 45 90 40Z" stroke-width="1.8" transform="rotate(10 94 40)"/>
+  <line x1="94" y1="35" x2="94" y2="45" stroke-width="1" transform="rotate(10 94 40)"/>
+  <path d="M100 55 Q104 50 108 55 Q104 60 100 55Z" stroke-width="1.8" transform="rotate(-20 104 55)"/>
+  <line x1="104" y1="50" x2="104" y2="60" stroke-width="1" transform="rotate(-20 104 55)"/>
+  <path d="M94 68 Q98 63 102 68 Q98 73 94 68Z" stroke-width="1.8" transform="rotate(5 98 68)"/>
+  <line x1="98" y1="63" x2="98" y2="73" stroke-width="1" transform="rotate(5 98 68)"/>
+  <!-- Spoon on saucer -->
+  <path d="M28 98 Q32 94 38 96" stroke-width="1.8"/>
+  <ellipse cx="38" cy="97" rx="5" ry="3" stroke-width="1.5"/>
+</svg>

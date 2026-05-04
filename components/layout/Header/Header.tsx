@@ -1,204 +1,354 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import {
-  animate,
-  AnimatePresence,
-  easeIn,
-  easeOut,
-  motion,
-} from "framer-motion";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { MenuModal } from "./MenuModal";
 import { ForkKnife } from "@/components/ui/ForkKnife";
 import { Container } from "../Container";
+import { PageTransitionOverlay } from "../PageTransitionOverlay";
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.025 },
-  },
-  exit: {
-    transition: { staggerChildren: 0.015, staggerDirection: -1 },
-  },
+const MENU_BACKDROP_EXIT_MS = 140;
+const PAGE_TRANSITION_PUSH_DELAY_MS = 280;
+const PAGE_TRANSITION_MIN_COVER_MS = 700;
+const PAGE_TRANSITION_REVEAL_DELAY_MS = 720;
+const PAGE_TRANSITION_FALLBACK_MS = 4200;
+const COLOR_PRIMARY = "#ffeedf";
+const COLOR_SECONDARY = "#450b1d";
+const COLOR_HOME = COLOR_PRIMARY;
+
+const getPageChromeColor = (path: string) =>
+  path === "/" ? COLOR_HOME : COLOR_PRIMARY;
+
+const setRootChromeColor = (color: string) => {
+  if (typeof document === "undefined") return;
+  document.documentElement.style.setProperty("--browser-chrome-color", color);
 };
 
-const letterVariants = {
-  hidden: { y: -12, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.18, ease: easeOut },
-  },
-  exit: {
-    y: 12,
-    opacity: 0,
-    transition: { duration: 0.15, ease: easeIn },
-  },
+const setThemeColor = (color: string) => {
+  if (typeof document === "undefined") return;
+
+  const metas = document.querySelectorAll<HTMLMetaElement>(
+    'meta[name="theme-color"]',
+  );
+
+  if (metas.length === 0) {
+    const meta = document.createElement("meta");
+    meta.setAttribute("name", "theme-color");
+    meta.setAttribute("content", color);
+    document.head.appendChild(meta);
+    return;
+  }
+
+  metas.forEach((meta) => meta.setAttribute("content", color));
+};
+
+const setStableThemeColor = () => {
+  setThemeColor(COLOR_PRIMARY);
+};
+
+const setBrowserChromeColor = (color: string) => {
+  setRootChromeColor(color);
+  setThemeColor(color);
 };
 
 export const Header: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(0);
+  const isMenuOpenRef = useRef(false);
+  const closeTimerRef = useRef<number | null>(null);
+  const routeTransitionStartRef = useRef(0);
+  const routeTransitionTargetRef = useRef<string | null>(null);
+  const routeTransitionTimersRef = useRef<number[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuClosing, setIsMenuClosing] = useState(false);
+  const [routeTransitionState, setRouteTransitionState] = useState<
+    "idle" | "covering" | "settling"
+  >("idle");
 
   const pathname = usePathname();
-  const isFixed = pathname.startsWith("/about");
+  const router = useRouter();
   const lenis = useLenis();
-
   const isHome = pathname === "/";
 
-  useEffect(() => {
-    let meta = document.querySelector('meta[name="theme-color"]');
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "theme-color");
-      document.head.appendChild(meta);
-    }
-
-    meta.setAttribute("content", isMenuOpen ? "#450b1d" : "#ffeedf");
-  }, [isMenuOpen]);
-
-  // Pre-warm Framer Motion on mount
-  useEffect(() => {
-    const a = animate(0, 1, { duration: 0.01 });
-    const b = animate(0, 0.001, {
-      type: "spring",
-      stiffness: 120,
-      damping: 14,
+  const clearRouteTransitionTimers = useCallback(() => {
+    routeTransitionTimersRef.current.forEach((timer) => {
+      window.clearTimeout(timer);
     });
-    return () => {
-      a.stop();
-      b.stop();
-    };
+    routeTransitionTimersRef.current = [];
   }, []);
 
-  // Close menu on route change
-  useEffect(() => {
+  const addRouteTransitionTimer = useCallback(
+    (callback: () => void, delay: number) => {
+      const timer = window.setTimeout(() => {
+        routeTransitionTimersRef.current =
+          routeTransitionTimersRef.current.filter((item) => item !== timer);
+        callback();
+      }, delay);
+
+      routeTransitionTimersRef.current.push(timer);
+      return timer;
+    },
+    [],
+  );
+
+  const openMenu = useCallback(() => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+
+    setStableThemeColor();
+    setRootChromeColor(COLOR_SECONDARY);
+    isMenuOpenRef.current = true;
+    setIsMenuClosing(false);
+    setIsMenuOpen(true);
+  }, []);
+
+  const closeMenu = useCallback((
+    nextPath = pathname,
+    options: { keepChromeSecondary?: boolean } = {},
+  ) => {
+    if (!isMenuOpenRef.current) return;
+
+    if (options.keepChromeSecondary) {
+      setBrowserChromeColor(COLOR_SECONDARY);
+    } else {
+      setStableThemeColor();
+      setRootChromeColor(getPageChromeColor(nextPath));
+    }
+
+    isMenuOpenRef.current = false;
+    setIsMenuClosing(true);
     setIsMenuOpen(false);
+
+    closeTimerRef.current = window.setTimeout(() => {
+      setIsMenuClosing(false);
+      closeTimerRef.current = null;
+    }, MENU_BACKDROP_EXIT_MS);
   }, [pathname]);
+
+  const finishRouteTransition = useCallback((nextPath: string) => {
+    setBrowserChromeColor(getPageChromeColor(nextPath));
+    setRouteTransitionState("settling");
+
+    addRouteTransitionTimer(() => {
+      setRouteTransitionState("idle");
+      routeTransitionTargetRef.current = null;
+    }, PAGE_TRANSITION_REVEAL_DELAY_MS);
+  }, [addRouteTransitionTimer]);
+
+  const navigateFromMenu = useCallback((nextPath: string) => {
+    if (routeTransitionTargetRef.current) return;
+
+    if (nextPath === pathname) {
+      closeMenu(nextPath);
+      return;
+    }
+
+    clearRouteTransitionTimers();
+    routeTransitionTargetRef.current = nextPath;
+    routeTransitionStartRef.current = window.performance.now();
+    setBrowserChromeColor(COLOR_SECONDARY);
+    setRouteTransitionState("covering");
+    closeMenu(nextPath, { keepChromeSecondary: true });
+
+    addRouteTransitionTimer(() => {
+      router.push(nextPath);
+    }, PAGE_TRANSITION_PUSH_DELAY_MS);
+
+    addRouteTransitionTimer(() => {
+      if (!routeTransitionTargetRef.current) return;
+      finishRouteTransition(routeTransitionTargetRef.current);
+    }, PAGE_TRANSITION_FALLBACK_MS);
+  }, [
+    addRouteTransitionTimer,
+    clearRouteTransitionTimers,
+    closeMenu,
+    finishRouteTransition,
+    pathname,
+    router,
+  ]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) {
+        window.clearTimeout(closeTimerRef.current);
+      }
+      clearRouteTransitionTimers();
+    };
+  }, [clearRouteTransitionTimers]);
 
   // Sync header height to CSS variable
   useLayoutEffect(() => {
     const update = () => {
       if (!headerRef.current) return;
-      const height = headerRef.current.offsetHeight;
-      setHeaderHeight(height);
       document.documentElement.style.setProperty(
         "--header-height",
-        `${height}px`,
+        `${headerRef.current.offsetHeight}px`,
       );
     };
-
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Lock scroll when menu is open
+  // Close menu on route change
   useEffect(() => {
-    if (isMenuOpen) {
-      lenis?.stop();
-
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-    } else {
-      lenis?.start();
-
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.width = "";
+    if (isMenuOpenRef.current) {
+      closeMenu(pathname);
+      return;
     }
 
-    return () => {
+    if (routeTransitionTargetRef.current) return;
+
+    setStableThemeColor();
+    setRootChromeColor(getPageChromeColor(pathname));
+  }, [closeMenu, pathname]);
+
+  useEffect(() => {
+    if (routeTransitionTargetRef.current !== pathname) return;
+
+    clearRouteTransitionTimers();
+
+    const elapsed = window.performance.now() - routeTransitionStartRef.current;
+    const delay = Math.max(PAGE_TRANSITION_MIN_COVER_MS - elapsed, 0);
+
+    addRouteTransitionTimer(() => {
+      finishRouteTransition(pathname);
+    }, delay);
+  }, [
+    addRouteTransitionTimer,
+    clearRouteTransitionTimers,
+    finishRouteTransition,
+    pathname,
+  ]);
+
+  const isRouteTransitionActive = routeTransitionState !== "idle";
+  const isMenuChromeActive =
+    isMenuOpen || isMenuClosing || isRouteTransitionActive;
+
+  // Scroll lock: keep this light for mobile Safari.
+  useEffect(() => {
+    if (isMenuChromeActive) {
+      lenis?.stop();
+      document.documentElement.classList.add("menu-open");
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
       lenis?.start();
+      document.documentElement.classList.remove("menu-open");
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.width = "";
+    }
+    return () => {
+      lenis?.start();
+      document.documentElement.classList.remove("menu-open");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
-  }, [isMenuOpen, lenis]);
+  }, [isMenuChromeActive, lenis]);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () => {
+    if (isMenuOpenRef.current) {
+      closeMenu(pathname);
+      return;
+    }
+
+    openMenu();
+  };
+
   const buttonText = isMenuOpen ? "close" : "open";
-  const knifeColor = isMenuOpen ? "#ffeedf" : "#ffeedf";
+
+  // Style differs between home (transparent overlay) and inner pages (solid cream)
+  const headerBg =
+    isHome || isMenuChromeActive ? "bg-transparent" : "bg-primary";
+  const showLightChrome = isHome || isMenuChromeActive;
+  const forkColor = showLightChrome ? "#ffeedf" : "#450b1d";
+  const chromeColor = showLightChrome ? "text-primary" : "text-secondary";
 
   return (
     <>
       <Container
-        className={`${isFixed ? "fixed" : "absolute"} grid grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] py-2 right-0 left-0 z-[100]`}
         ref={headerRef}
+        className={`absolute top-0 left-0 right-0 z-[100] grid grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] py-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] ${headerBg}`}
       >
-        {/* Address — desktop only */}
-        <div className="hidden lg:flex lg:items-center">
-          <p
-            className={`text-xl max-w-1/2 ${isMenuOpen ? "text-primary" : "text-primary"}`}
+        {/* Address: desktop only */}
+        <div className="relative z-10 hidden items-center lg:flex">
+          <a
+            href="https://maps.google.com/?q=45.639164,12.383047"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-xl transition-opacity hover:opacity-75 ${chromeColor}`}
           >
             Via Tommaso da Modena 1/b Roncade (TV)
-          </p>
+          </a>
         </div>
 
         {/* Logo */}
-        <div className="flex justify-center">
-          <div className="relative h-32 md:h-28 lg:h-45 w-32 md:w-28 lg:w-45">
+        <div className=" relative z-10 flex justify-center">
+          <Link
+            href="/"
+            aria-label="Go to Restaurant Nadi home"
+            className="relative h-32 w-32 md:h-28 md:w-28 lg:h-45 lg:w-45"
+          >
             <Image
-              src="/logo-white.png"
+              src="/logo-nadi-light.png"
               fill
               alt="Restaurant Nadi logo"
-              className={`object-contain transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
+              className={`object-contain ${
+                showLightChrome ? "opacity-100" : "opacity-0"
+              }`}
               priority
             />
             <Image
-              src="/logo-white.png"
+              src="/logo-nadi-dark.png"
               fill
-              alt="Restaurant Nadi logo"
-              className={`object-contain transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "opacity-0"}`}
+              alt=""
+              aria-hidden="true"
+              className={`object-contain ${
+                showLightChrome ? "opacity-0" : "opacity-100"
+              }`}
               priority
             />
-          </div>
+          </Link>
         </div>
 
         {/* Menu toggle */}
-        <div className="flex justify-end items-center">
+        <div className=" relative z-10 flex items-center justify-end">
           <button
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
             className="flex flex-col items-center"
           >
-            <ForkKnife open={isMenuOpen} color={knifeColor} />
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={buttonText}
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className={`sm:text-base lg:text-xl inline-flex font-extralight ${isMenuOpen ? "text-primary" : "text-primary"}`}
-              >
-                {buttonText.split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    variants={letterVariants}
-                    className="inline-block"
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </motion.span>
-            </AnimatePresence>
+            <ForkKnife open={isMenuOpen} color={forkColor} />
+
+            <span
+              className={`text-sm font-light lg:text-xl ${chromeColor}`}
+            >
+              {buttonText}
+            </span>
           </button>
         </div>
       </Container>
 
-      <MenuModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <AnimatePresence initial={false}>
+        {isMenuOpen && (
+          <MenuModal onNavigate={navigateFromMenu} />
+        )}
+      </AnimatePresence>
+
+      <PageTransitionOverlay state={routeTransitionState} />
     </>
   );
 };

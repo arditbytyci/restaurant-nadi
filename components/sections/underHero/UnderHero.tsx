@@ -1,17 +1,15 @@
-// UnderHero.tsx
-import { MovingSeparator } from "@/components/ui/Seperator/Seperator";
+import { MovingSeparator } from "@/components/ui/Separator/Separator";
 import Image from "next/image";
 
 const dishes = [
-  { src: "/patate4.png", name: "Patate al forno" },
-  { src: "/burek_final.png", name: "pite con gjizë" },
-  { src: "/cevapi_final.png", name: "Ćevapi" },
+  { src: "/dish-potatoes.png", name: "Patate al forno" },
+  { src: "/dish-burek.png", name: "pite con gjizë" },
+  { src: "/dish-cevapi.png", name: "Ćevapi" },
 ];
 
 export const UnderHero = () => {
   return (
     <section className="bg-background text-secondary">
-      {/* Story */}
       <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:py-28">
         <p className="mb-4 text-xs uppercase tracking-[0.45em] text-secondary/60">
           Tradizione Balcanica
@@ -31,8 +29,6 @@ export const UnderHero = () => {
       </div>
 
       <MovingSeparator direction="right" />
-
-      {/* Signature dishes */}
       <div className="px-6 py-16 lg:px-16 lg:py-24">
         <div className="mb-12 text-center">
           <p className="mb-3 text-xs uppercase tracking-[0.4em] text-secondary/50">

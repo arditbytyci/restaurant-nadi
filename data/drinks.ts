@@ -1,7 +1,6 @@
 import { Category } from "@/types/menu";
 import { categories } from "./categories";
 import { Size } from "@/types/menu";
-import { label } from "framer-motion/client";
 
 export type MenuItemBase = {
   id: string;
@@ -17,7 +16,6 @@ type SizedItem = MenuItemBase & { size: Size; price?: never };
 export type MenuItem = PricedItem | SizedItem;
 
 export const drinkItems: MenuItem[] = [
-  //draft beer
   {
     id: "beer-01",
     name: "FORST PILLS",
@@ -83,7 +81,6 @@ export const drinkItems: MenuItem[] = [
       ],
     },
   },
-  // bottle beer
 
   {
     id: "bbeer-01",
@@ -117,7 +114,6 @@ export const drinkItems: MenuItem[] = [
     category: categories.bottleBeer,
   },
 
-  //normal drinks
 
   {
     id: "nd-01",
@@ -197,61 +193,60 @@ export const drinkItems: MenuItem[] = [
     category: categories.drinks,
   },
 
-  // apperitivi
 
   {
     id: "apprt-01",
     name: "SPRITZ APEROL / SELECT",
     price: 4,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-02",
     name: "SPRITZ CAMPARI",
     price: 4,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-03",
     name: "PROSECCO D.O.C.G. (CALICE)",
     price: 4.5,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-04",
     name: "GINGER / CRODINO",
     price: 3.5,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-05",
     name: "GIN / VODKA PREMIUM",
     price: 10,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-06",
     name: "GIN / VODKA (BASE)",
     price: 8,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-07",
     name: "NEGRONI",
     price: 8,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-08",
     name: "AMERICANO",
     price: 8,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "apprt-09",
     name: "JACK DANIEL'S & COLA",
     price: 8,
-    category: categories.apperitivi,
+    category: categories.aperitivi,
   },
   {
     id: "grpp-01",
@@ -293,70 +288,70 @@ export const drinkItems: MenuItem[] = [
     id: "cff-01",
     name: "CAFFÈ ESPRESSO",
     price: 1.5,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-01",
     name: "CAFFÈ MACCHIATO",
     allergen: [7],
     price: 1.6,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-03",
     name: "CAFFÈ DECAFFEINATO",
     price: 1.6,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-04",
     name: "MACCHIATONE",
     price: 1.7,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-05",
     name: "CAPPUCCINO",
     allergen: [7],
     price: 2.0,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-06",
     name: "LATTE MACCHIATO",
     allergen: [7],
     price: 2.5,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-07",
     name: "CAFFÈ ORZO",
     price: 2.9,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-08",
     name: "GINSENG",
     price: 1.5,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-09",
     name: "CAFFÈ CORRETTO",
     price: 2.5,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-10",
     name: "CAFFÈ TURCO",
     price: 2.5,
-    category: categories.caffee,
+    category: categories.caffe,
   },
   {
     id: "cff-11",
     name: "QAJ (TÈ BALCANICO)",
     price: 2.0,
-    category: categories.caffee,
+    category: categories.caffe,
   },
 
   {

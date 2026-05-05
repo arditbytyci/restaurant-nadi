@@ -1,3 +1,3 @@
-export { Clock } from "./Clock";
-export { Instagram } from "./Instagram";
-export { Location } from "./Location";
+export { Clock } from "./clock";
+export { Instagram } from "./instagram";
+export { Location } from "./location";

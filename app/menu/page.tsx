@@ -12,7 +12,7 @@ const MenuPage: React.FC = () => {
 
   return (
     <div className="min-h-dvh bg-background relative py-8 ">
-      <Container className="items-center justify-center flex flex-col gap-20 pt-[var(--header-height)]">
+      <Container className="items-center justify-center flex flex-col gap-20 pt-[var(--header-height)] pb-16 sm:pb-20 lg:pb-28">
         <MenuHeader
           mode={mode}
           onToggle={() => setMode((prev) => (prev === "eat" ? "drink" : "eat"))}

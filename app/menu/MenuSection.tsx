@@ -1,11 +1,10 @@
 import { SideItem } from "@/types/menu";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { formatMenuPrice } from "./formatPrice";
 
 type MenuSectionProps = {
   title: string;
   desc?: string;
-  illustration?: string;
   sides?: SideItem[];
   extras?: SideItem[];
   children: React.ReactNode;
@@ -38,7 +37,6 @@ const itemVariants = {
 const MenuSection = ({
   title,
   desc,
-  illustration,
   children,
   sides,
   extras,
@@ -52,37 +50,14 @@ const MenuSection = ({
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
       >
-        <div className="flex flex-col justify-center items-center text-center gap-6">
+        <div className="flex flex-col items-center justify-center gap-5 text-center sm:gap-6">
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-4 lg:gap-6"
+            className="flex max-w-full flex-col items-center justify-center gap-4 px-4"
           >
-            {illustration && (
-              <div className="w-8 h-8 lg:w-24 lg:h-24  shrink-0">
-                <Image
-                  src={illustration}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
-
-            <h3 className="max-w-full text-center text-3xl font-semibold uppercase sm:text-4xl lg:text-6xl">
+            <h3 className="max-w-5xl text-center text-2xl font-semibold uppercase leading-[1.18] tracking-[0.08em] sm:text-4xl lg:text-6xl">
               {title}
             </h3>
-            {illustration && (
-              <div className="w-8 h-8 lg:w-24 lg:h-24  shrink-0 scale-x-[-1]">
-                <Image
-                  src={illustration}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
           </motion.div>
 
           {desc && (
@@ -104,10 +79,16 @@ const MenuSection = ({
             </p>
             <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2">
               {sides.map((side, i) => (
-                <span key={side.name} className="text-base lg:text-xl">
-                  {side.name} — € {side.price}
+                <span
+                  key={side.name}
+                  className="inline-flex items-baseline gap-2 text-sm sm:text-base lg:text-xl"
+                >
+                  <span>{side.name}</span>
+                  <span className="font-medium tabular-nums">
+                    {formatMenuPrice(side.price)}
+                  </span>
                   {i < sides.length - 1 && (
-                    <span className="ml-4 opacity-30">|</span>
+                    <span className="ml-2 hidden opacity-30 sm:inline">|</span>
                   )}
                 </span>
               ))}
@@ -123,11 +104,16 @@ const MenuSection = ({
               {extras.map((extra, i) => (
                 <span
                   key={extra.name}
-                  className="text-xl font-semibold uppercase lg:text-3xl"
+                  className="inline-flex items-baseline gap-2 text-base font-semibold uppercase sm:text-xl lg:text-3xl"
                 >
-                  {extra.name} — € {extra.price}
+                  <span>{extra.name}</span>
+                  <span className="tabular-nums">
+                    {formatMenuPrice(extra.price)}
+                  </span>
                   {i < extras.length - 1 && (
-                    <span className="ml-6 opacity-60 font-light">|</span>
+                    <span className="ml-4 hidden font-light opacity-60 sm:inline">
+                      |
+                    </span>
                   )}
                 </span>
               ))}

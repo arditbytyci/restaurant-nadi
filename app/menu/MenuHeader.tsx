@@ -39,7 +39,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeInOut" }}
-        className="space-y-4"
+        className="w-full space-y-4 overflow-visible px-3 sm:px-6"
       >
         <p className="uppercase tracking-[0.35em] text-xs lg:text-sm font-light">
           Il nostro menù
@@ -52,9 +52,9 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="min-h-36 space-y-4 lg:min-h-44"
+            className="min-h-36 space-y-4 overflow-visible lg:min-h-44"
           >
-            <h2 className="font-edlavonia text-5xl leading-none tracking-wide sm:text-6xl lg:text-8xl">
+            <h2 className="px-2 font-edlavonia text-5xl leading-[1.08] tracking-wide sm:px-4 sm:text-6xl lg:text-8xl">
               {isEat ? "Cosa ti aspetta" : "La carta dei drink"}
             </h2>
 

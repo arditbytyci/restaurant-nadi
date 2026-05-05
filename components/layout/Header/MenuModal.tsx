@@ -15,18 +15,16 @@ const links = [
   { href: "/about", label: "About" },
 ];
 
-const panelTransition = {
+const contentTransition = {
   type: "spring" as const,
   stiffness: 220,
   damping: 28,
   mass: 0.9,
 };
 
-const panelExitTransition = {
-  type: "spring" as const,
-  stiffness: 240,
-  damping: 32,
-  mass: 0.9,
+const exitTransition = {
+  duration: 0.18,
+  ease: [0.22, 1, 0.36, 1] as const,
 };
 
 export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
@@ -34,6 +32,10 @@ export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
     event: MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
+    if (event.defaultPrevented) {
+      return;
+    }
+
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return;
     }
@@ -47,18 +49,14 @@ export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.14, ease: "linear" }}
-      className="fixed inset-0 z-[99] h-[100dvh] w-full overflow-hidden bg-secondary text-primary"
+      transition={exitTransition}
+      className="fixed inset-x-0 top-[calc(0px_-_env(safe-area-inset-top))] bottom-[calc(0px_-_env(safe-area-inset-bottom))] z-[99] w-full overflow-hidden bg-primary text-secondary will-change-[opacity]"
     >
       <motion.div
         initial={{ opacity: 0, y: -24 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{
-          opacity: 0,
-          y: -24,
-          transition: panelExitTransition,
-        }}
-        transition={panelTransition}
+        exit={{ opacity: 0, y: -22, transition: exitTransition }}
+        transition={contentTransition}
         className="flex h-full transform-gpu flex-col overflow-hidden px-6 pt-[var(--header-height)] will-change-transform"
       >
         <nav className="flex flex-1 flex-col items-center justify-center gap-8">
@@ -67,14 +65,9 @@ export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
               key={link.href}
               initial={{ y: -16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{
-                y: -12,
-                opacity: 0,
-                transition: panelExitTransition,
-              }}
               transition={{
                 delay: index * 0.05,
-                ...panelTransition,
+                ...contentTransition,
               }}
             >
               <Link
@@ -89,25 +82,25 @@ export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
         </nav>
 
         <div className="pb-8 text-center">
-          <div className="mb-6 whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-primary/50">
+          <div className="mb-6 whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-secondary/50">
             Tradizione · Cucina · Casa
           </div>
 
-          <div className="mx-auto mb-6 h-px w-20 bg-primary/25" />
+          <div className="mx-auto mb-6 h-px w-20 bg-secondary/25" />
 
           <div className="flex flex-col items-center gap-5">
             <a
               href="https://www.instagram.com/nadisaporibalcanici?igsh=MXhqdzduMGJjdTZ5cA=="
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-80 transition hover:opacity-100"
+              className="text-secondary/80 transition hover:text-secondary"
             >
-              <Instagram color="#ffeedf" height="18" width="auto" />
+              <Instagram color="currentColor" className="h-8 w-8" />
             </a>
 
             <a
               href="tel:+393933783921"
-              className="text-sm font-light tracking-[0.2em] text-primary/70 transition hover:text-primary"
+              className="text-sm font-light tracking-[0.2em] text-secondary/70 transition hover:text-secondary"
             >
               +39 393 378 3921
             </a>

@@ -18,17 +18,15 @@ import { ForkKnife } from "@/components/ui/ForkKnife";
 import { Container } from "../Container";
 import { PageTransitionOverlay } from "../PageTransitionOverlay";
 
-const MENU_BACKDROP_EXIT_MS = 140;
+const MENU_BACKDROP_EXIT_MS = 220;
 const PAGE_TRANSITION_PUSH_DELAY_MS = 280;
 const PAGE_TRANSITION_MIN_COVER_MS = 700;
 const PAGE_TRANSITION_REVEAL_DELAY_MS = 720;
 const PAGE_TRANSITION_FALLBACK_MS = 4200;
 const COLOR_PRIMARY = "#ffeedf";
 const COLOR_SECONDARY = "#450b1d";
-const COLOR_HOME = COLOR_PRIMARY;
 
-const getPageChromeColor = (path: string) =>
-  path === "/" ? COLOR_HOME : COLOR_PRIMARY;
+const getPageChromeColor = () => COLOR_PRIMARY;
 
 const setRootChromeColor = (color: string) => {
   if (typeof document === "undefined") return;
@@ -68,11 +66,12 @@ export const Header: React.FC = () => {
   const closeTimerRef = useRef<number | null>(null);
   const routeTransitionStartRef = useRef(0);
   const routeTransitionTargetRef = useRef<string | null>(null);
+  const routeTransitionTargetPathnameRef = useRef<string | null>(null);
   const routeTransitionTimersRef = useRef<number[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuClosing, setIsMenuClosing] = useState(false);
   const [routeTransitionState, setRouteTransitionState] = useState<
-    "idle" | "covering" | "settling"
+    "idle" | "covering"
   >("idle");
 
   const pathname = usePathname();
@@ -108,24 +107,17 @@ export const Header: React.FC = () => {
     }
 
     setStableThemeColor();
-    setRootChromeColor(COLOR_SECONDARY);
+    setRootChromeColor(COLOR_PRIMARY);
     isMenuOpenRef.current = true;
     setIsMenuClosing(false);
     setIsMenuOpen(true);
   }, []);
 
-  const closeMenu = useCallback((
-    nextPath = pathname,
-    options: { keepChromeSecondary?: boolean } = {},
-  ) => {
+  const closeMenu = useCallback(() => {
     if (!isMenuOpenRef.current) return;
 
-    if (options.keepChromeSecondary) {
-      setBrowserChromeColor(COLOR_SECONDARY);
-    } else {
-      setStableThemeColor();
-      setRootChromeColor(getPageChromeColor(nextPath));
-    }
+    setStableThemeColor();
+    setRootChromeColor(getPageChromeColor());
 
     isMenuOpenRef.current = false;
     setIsMenuClosing(true);
@@ -135,40 +127,48 @@ export const Header: React.FC = () => {
       setIsMenuClosing(false);
       closeTimerRef.current = null;
     }, MENU_BACKDROP_EXIT_MS);
-  }, [pathname]);
+  }, []);
 
-  const finishRouteTransition = useCallback((nextPath: string) => {
-    setBrowserChromeColor(getPageChromeColor(nextPath));
-    setRouteTransitionState("settling");
+  const finishRouteTransition = useCallback(() => {
+    setBrowserChromeColor(getPageChromeColor());
 
     addRouteTransitionTimer(() => {
       setRouteTransitionState("idle");
       routeTransitionTargetRef.current = null;
+      routeTransitionTargetPathnameRef.current = null;
     }, PAGE_TRANSITION_REVEAL_DELAY_MS);
   }, [addRouteTransitionTimer]);
 
-  const navigateFromMenu = useCallback((nextPath: string) => {
+  const navigateWithTransition = useCallback((nextPath: string) => {
     if (routeTransitionTargetRef.current) return;
 
-    if (nextPath === pathname) {
-      closeMenu(nextPath);
+    const nextUrl = new URL(nextPath, window.location.origin);
+    const nextHref = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+    const isSameLocation =
+      nextUrl.pathname === pathname &&
+      nextUrl.search === window.location.search &&
+      nextUrl.hash === window.location.hash;
+
+    if (isSameLocation) {
+      closeMenu();
       return;
     }
 
     clearRouteTransitionTimers();
-    routeTransitionTargetRef.current = nextPath;
+    routeTransitionTargetRef.current = nextHref;
+    routeTransitionTargetPathnameRef.current = nextUrl.pathname;
     routeTransitionStartRef.current = window.performance.now();
-    setBrowserChromeColor(COLOR_SECONDARY);
+    setBrowserChromeColor(COLOR_PRIMARY);
     setRouteTransitionState("covering");
-    closeMenu(nextPath, { keepChromeSecondary: true });
+    closeMenu();
 
     addRouteTransitionTimer(() => {
-      router.push(nextPath);
+      router.push(nextHref);
     }, PAGE_TRANSITION_PUSH_DELAY_MS);
 
     addRouteTransitionTimer(() => {
       if (!routeTransitionTargetRef.current) return;
-      finishRouteTransition(routeTransitionTargetRef.current);
+      finishRouteTransition();
     }, PAGE_TRANSITION_FALLBACK_MS);
   }, [
     addRouteTransitionTimer,
@@ -178,6 +178,57 @@ export const Header: React.FC = () => {
     pathname,
     router,
   ]);
+
+  useEffect(() => {
+    const handleInternalLinkClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const anchor = target.closest<HTMLAnchorElement>("a[href]");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || href.startsWith("#")) return;
+
+      if (
+        anchor.hasAttribute("download") ||
+        anchor.getAttribute("target") === "_blank" ||
+        anchor.closest("[data-no-route-transition]")
+      ) {
+        return;
+      }
+
+      const url = new URL(anchor.href);
+      if (url.origin !== window.location.origin) return;
+
+      const isSamePageHash =
+        url.pathname === window.location.pathname &&
+        url.search === window.location.search &&
+        url.hash !== "";
+
+      if (isSamePageHash) return;
+
+      event.preventDefault();
+      navigateWithTransition(`${url.pathname}${url.search}${url.hash}`);
+    };
+
+    document.addEventListener("click", handleInternalLinkClick, true);
+
+    return () => {
+      document.removeEventListener("click", handleInternalLinkClick, true);
+    };
+  }, [navigateWithTransition]);
 
   useEffect(() => {
     return () => {
@@ -205,18 +256,18 @@ export const Header: React.FC = () => {
   // Close menu on route change
   useEffect(() => {
     if (isMenuOpenRef.current) {
-      closeMenu(pathname);
+      closeMenu();
       return;
     }
 
     if (routeTransitionTargetRef.current) return;
 
     setStableThemeColor();
-    setRootChromeColor(getPageChromeColor(pathname));
+    setRootChromeColor(getPageChromeColor());
   }, [closeMenu, pathname]);
 
   useEffect(() => {
-    if (routeTransitionTargetRef.current !== pathname) return;
+    if (routeTransitionTargetPathnameRef.current !== pathname) return;
 
     clearRouteTransitionTimers();
 
@@ -224,7 +275,7 @@ export const Header: React.FC = () => {
     const delay = Math.max(PAGE_TRANSITION_MIN_COVER_MS - elapsed, 0);
 
     addRouteTransitionTimer(() => {
-      finishRouteTransition(pathname);
+      finishRouteTransition();
     }, delay);
   }, [
     addRouteTransitionTimer,
@@ -234,12 +285,12 @@ export const Header: React.FC = () => {
   ]);
 
   const isRouteTransitionActive = routeTransitionState !== "idle";
-  const isMenuChromeActive =
-    isMenuOpen || isMenuClosing || isRouteTransitionActive;
+  const shouldLockPage = isMenuOpen || isMenuClosing || isRouteTransitionActive;
+  const isHeaderMenuVisualActive = isMenuOpen || isRouteTransitionActive;
 
   // Scroll lock: keep this light for mobile Safari.
   useEffect(() => {
-    if (isMenuChromeActive) {
+    if (shouldLockPage) {
       lenis?.stop();
       document.documentElement.classList.add("menu-open");
       document.documentElement.style.overflow = "hidden";
@@ -256,11 +307,11 @@ export const Header: React.FC = () => {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
-  }, [isMenuChromeActive, lenis]);
+  }, [shouldLockPage, lenis]);
 
   const toggleMenu = () => {
     if (isMenuOpenRef.current) {
-      closeMenu(pathname);
+      closeMenu();
       return;
     }
 
@@ -271,10 +322,24 @@ export const Header: React.FC = () => {
 
   // Style differs between home (transparent overlay) and inner pages (solid cream)
   const headerBg =
-    isHome || isMenuChromeActive ? "bg-transparent" : "bg-primary";
-  const showLightChrome = isHome || isMenuChromeActive;
-  const forkColor = showLightChrome ? "#ffeedf" : "#450b1d";
-  const chromeColor = showLightChrome ? "text-primary" : "text-secondary";
+    isHome && !isHeaderMenuVisualActive ? "bg-transparent" : "bg-primary";
+  const chromeColor = isHeaderMenuVisualActive
+    ? "text-secondary"
+    : isHome
+      ? "text-primary"
+      : "text-secondary";
+  const lightLogoOpacity = isHeaderMenuVisualActive
+    ? "opacity-0"
+    : isHome
+      ? "opacity-100"
+      : "opacity-0";
+  const darkLogoOpacity = isHeaderMenuVisualActive
+    ? "opacity-100"
+    : isHome
+      ? "opacity-0"
+      : "opacity-100";
+  const forkColor =
+    isHeaderMenuVisualActive || !isHome ? COLOR_SECONDARY : COLOR_PRIMARY;
 
   return (
     <>
@@ -283,7 +348,7 @@ export const Header: React.FC = () => {
         className={`absolute top-0 left-0 right-0 z-[100] grid grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] py-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] ${headerBg}`}
       >
         {/* Address: desktop only */}
-        <div className="relative z-10 hidden items-center lg:flex">
+        <div className="relative z-10 hidden items-center lg:col-start-1 lg:flex">
           <a
             href="https://maps.google.com/?q=45.639164,12.383047"
             target="_blank"
@@ -295,7 +360,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Logo */}
-        <div className=" relative z-10 flex justify-center">
+        <div className="relative z-10 col-start-1 flex justify-start lg:col-start-2 lg:justify-center">
           <Link
             href="/"
             aria-label="Go to Restaurant Nadi home"
@@ -305,9 +370,7 @@ export const Header: React.FC = () => {
               src="/logo-nadi-light.png"
               fill
               alt="Restaurant Nadi logo"
-              className={`object-contain ${
-                showLightChrome ? "opacity-100" : "opacity-0"
-              }`}
+              className={`object-contain transition-opacity duration-150 ease-linear ${lightLogoOpacity}`}
               priority
             />
             <Image
@@ -315,21 +378,19 @@ export const Header: React.FC = () => {
               fill
               alt=""
               aria-hidden="true"
-              className={`object-contain ${
-                showLightChrome ? "opacity-0" : "opacity-100"
-              }`}
+              className={`object-contain transition-opacity duration-150 ease-linear ${darkLogoOpacity}`}
               priority
             />
           </Link>
         </div>
 
         {/* Menu toggle */}
-        <div className=" relative z-10 flex items-center justify-end">
+        <div className="relative z-10 col-start-2 flex items-center justify-end lg:col-start-3">
           <button
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
-            className="flex flex-col items-center"
+            className={`flex flex-col items-center ${chromeColor}`}
           >
             <ForkKnife open={isMenuOpen} color={forkColor} />
 
@@ -344,7 +405,7 @@ export const Header: React.FC = () => {
 
       <AnimatePresence initial={false}>
         {isMenuOpen && (
-          <MenuModal onNavigate={navigateFromMenu} />
+          <MenuModal onNavigate={navigateWithTransition} />
         )}
       </AnimatePresence>
 

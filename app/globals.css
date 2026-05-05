@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "leaflet/dist/leaflet.css";
 
 :root {
   --background: #ffeedf;
@@ -8,7 +7,7 @@
   --color-secondary: #450b1d;
   --header-height: 120px;
   --font-poppins: "Segoe UI", Arial, Helvetica, sans-serif;
-  --browser-chrome-color: var(--background);
+  --browser-chrome-color: var(--color-primary);
 }
 
 @theme {
@@ -57,4 +56,44 @@ body {
 
 *::-webkit-scrollbar {
   display: none;
+}
+
+.moving-separator {
+  animation-duration: 28s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.moving-separator-left {
+  animation-name: moving-separator-left;
+}
+
+.moving-separator-right {
+  animation-name: moving-separator-right;
+}
+
+@keyframes moving-separator-left {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -410px 0;
+  }
+}
+
+@keyframes moving-separator-right {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 410px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moving-separator {
+    animation: none;
+  }
 }

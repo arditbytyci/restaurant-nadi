@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { ReactLenis } from "lenis/react";
 
 const DESKTOP_LENIS_OPTIONS = {
-  duration: 1.2,
-  easing: (t: number) => 1 - Math.pow(1 - t, 4),
-  lerp: 0.1,
+  duration: 0.7,
+  easing: (t: number) => 1 - Math.pow(1 - t, 3),
+  lerp: 0.16,
   smoothWheel: true,
   smoothTouch: false,
   syncTouch: false,

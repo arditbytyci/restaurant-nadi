@@ -22,7 +22,6 @@ const DrinksMenuContent = () => {
           <MenuSection
             key={category.id}
             title={formatTitle(category.title)}
-            illustration={category.illustration}
             desc={category.desc}
             sides={category.sides}
             extras={category.extras}

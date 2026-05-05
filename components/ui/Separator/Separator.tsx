@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 interface MovingSeparatorProps {
   direction?: "left" | "right";
 }
@@ -9,24 +7,6 @@ interface MovingSeparatorProps {
 export const MovingSeparator = ({
   direction = "left",
 }: MovingSeparatorProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let pos = 0;
-    let frame: number;
-
-    const tick = () => {
-      pos += direction === "left" ? -0.5 : 0.5;
-      if (ref.current) {
-        ref.current.style.backgroundPosition = `${pos}px 0`;
-      }
-      frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [direction]);
-
   const svgString = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 41 19' width='41' height='19'><path d="M13.6797 1.07847V0L12.1598 0V1.07847H13.6797Z" fill="#450B1D"/>
 <path d="M15.2002 4.31367V3.2352H13.6801V2.15674H12.1602V3.2352H10.6401V4.31367H12.1602V5.39194H13.6801V4.31367H15.2002Z" fill="#450B1D"/>
 <path d="M15.2002 2.15664V1.07837H13.6801V2.15664H15.2002Z" fill="#450B1D"/>
@@ -121,7 +101,11 @@ export const MovingSeparator = ({
 
   return (
     <div
-      ref={ref}
+      className={`moving-separator ${
+        direction === "left"
+          ? "moving-separator-left"
+          : "moving-separator-right"
+      }`}
       style={{
         width: "100%",
         height: "19px",

@@ -1,11 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import type { MouseEvent } from "react";
-import { Instagram } from "@/components/icons";
+import { Facebook, Instagram } from "@/components/icons";
+import { ForkKnife } from "@/components/ui/ForkKnife";
+import { Container } from "../Container";
 
 interface MenuModalProps {
+  onClose: () => void;
   onNavigate: (nextPath: string) => void;
 }
 
@@ -27,7 +31,14 @@ const exitTransition = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
-export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
+const COLOR_SECONDARY = "#450b1d";
+
+export const MenuModal: React.FC<MenuModalProps> = ({
+  onClose,
+  onNavigate,
+}) => {
+  const isPresent = useIsPresent();
+
   const handleNavigation = (
     event: MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -50,8 +61,51 @@ export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={exitTransition}
-      className="fixed inset-x-0 top-[calc(0px_-_env(safe-area-inset-top))] bottom-[calc(0px_-_env(safe-area-inset-bottom))] z-[99] w-full overflow-hidden bg-primary text-secondary will-change-[opacity]"
+      className="fixed inset-x-0 top-[calc(0px_-_env(safe-area-inset-top))] bottom-[calc(0px_-_env(safe-area-inset-bottom))] z-[110] w-full overflow-hidden bg-primary text-secondary will-change-[opacity]"
     >
+      <Container className="absolute left-0 right-0 top-0 z-20 grid grid-cols-[1fr_1fr] bg-transparent py-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] lg:grid-cols-[1fr_1fr_1fr]">
+        <div className="relative z-10 hidden items-center lg:col-start-1 lg:flex">
+          <a
+            href="https://maps.google.com/?q=45.639164,12.383047"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xl text-secondary transition-opacity hover:opacity-75"
+          >
+            Via Tommaso da Modena 1/b Roncade (TV)
+          </a>
+        </div>
+
+        <div className="relative z-10 col-start-1 flex justify-start lg:col-start-2 lg:justify-center">
+          <Link
+            href="/"
+            onClick={(event) => handleNavigation(event, "/")}
+            aria-label="Go to Restaurant Nadi home"
+            className="relative h-32 w-32 md:h-28 md:w-28 lg:h-45 lg:w-45"
+          >
+            <Image
+              src="/logo-nadi-dark.png"
+              fill
+              alt="Restaurant Nadi logo"
+              className="object-contain"
+              priority
+            />
+          </Link>
+        </div>
+
+        <div className="relative z-10 col-start-2 flex items-center justify-end lg:col-start-3">
+          <button
+            onClick={onClose}
+            aria-expanded="true"
+            aria-label="Close menu"
+            className="flex flex-col items-center text-secondary"
+          >
+            <ForkKnife open={isPresent} color={COLOR_SECONDARY} />
+
+            <span className="text-sm font-light lg:text-xl">close</span>
+          </button>
+        </div>
+      </Container>
+
       <motion.div
         initial={{ opacity: 0, y: -24 }}
         animate={{ opacity: 1, y: 0 }}
@@ -89,14 +143,27 @@ export const MenuModal: React.FC<MenuModalProps> = ({ onNavigate }) => {
           <div className="mx-auto mb-6 h-px w-20 bg-secondary/25" />
 
           <div className="flex flex-col items-center gap-5">
-            <a
-              href="https://www.instagram.com/nadisaporibalcanici?igsh=MXhqdzduMGJjdTZ5cA=="
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary/80 transition hover:text-secondary"
-            >
-              <Instagram color="currentColor" className="h-8 w-8" />
-            </a>
+            <div className="flex items-center gap-6">
+              <a
+                href="https://www.instagram.com/nadisaporibalcanici?igsh=MXhqdzduMGJjdTZ5cA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Restaurant Nadi"
+                className="text-secondary/80 transition hover:text-secondary"
+              >
+                <Instagram color="currentColor" className="h-12 w-12" />
+              </a>
+
+              <a
+                href="https://www.facebook.com/NadiSaporiBalcanici"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Restaurant Nadi"
+                className="text-secondary/80 transition hover:text-secondary"
+              >
+                <Facebook color="currentColor" className="h-12 w-12" />
+              </a>
+            </div>
 
             <a
               href="tel:+393933783921"

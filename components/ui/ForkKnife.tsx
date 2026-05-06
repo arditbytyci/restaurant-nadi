@@ -6,13 +6,22 @@ interface ForkKnifeProps {
   color?: string;
 }
 
-const utensilTransition = {
+const openUtensilTransition = {
   type: "spring" as const,
-  stiffness: 210,
-  damping: 28,
-  mass: 0.75,
-  restDelta: 0.01,
-  restSpeed: 0.5,
+  stiffness: 260,
+  damping: 25,
+  mass: 0.62,
+  restDelta: 0.001,
+  restSpeed: 0.01,
+};
+
+const closeUtensilTransition = {
+  type: "spring" as const,
+  stiffness: 430,
+  damping: 38,
+  mass: 0.5,
+  restDelta: 0.001,
+  restSpeed: 0.01,
 };
 
 export const ForkKnife: React.FC<ForkKnifeProps> = ({
@@ -20,6 +29,10 @@ export const ForkKnife: React.FC<ForkKnifeProps> = ({
   className = "",
   color = "#ffeedd",
 }) => {
+  const utensilTransition = open
+    ? openUtensilTransition
+    : closeUtensilTransition;
+
   return (
     <motion.svg
       width="80"

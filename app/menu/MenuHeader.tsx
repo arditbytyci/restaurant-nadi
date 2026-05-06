@@ -30,89 +30,126 @@ const GlassIcon = () => (
   </svg>
 );
 
+const menuTextEase = [0.16, 1, 0.3, 1] as const;
+
 const MenuHeader: React.FC<MenuHeaderProps> = ({ mode, onToggle }) => {
   const isEat = mode === "eat";
+  const headerTitle = isEat ? "Cosa ti aspetta" : "La carta dei drink";
+  const headerDescription = isEat
+    ? "Sapori balcanici, griglia e piatti di casa."
+    : "Vini, caffè e bevande selezionate per accompagnare ogni momento.";
 
   return (
-    <section className="w-full flex flex-col items-center text-center gap-8">
+    <section className="flex w-full flex-col items-center gap-8 text-center">
       <motion.div
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeInOut" }}
         className="w-full space-y-4 overflow-visible px-3 sm:px-6"
       >
-        <p className="uppercase tracking-[0.35em] text-xs lg:text-sm font-light">
+        <p className="text-xs font-light uppercase tracking-[0.35em] lg:text-sm">
           Il nostro menù
         </p>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={mode}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="min-h-36 space-y-4 overflow-visible lg:min-h-44"
-          >
-            <h2 className="px-2 font-edlavonia text-5xl leading-[1.08] tracking-wide sm:px-4 sm:text-6xl lg:text-8xl">
-              {isEat ? "Cosa ti aspetta" : "La carta dei drink"}
-            </h2>
-
-            <p className="mx-auto max-w-2xl text-sm lg:text-lg font-light opacity-80">
-              {isEat
-                ? "Sapori balcanici, griglia e piatti di casa."
-                : "Vini, caffè e bevande selezionate per accompagnare ogni momento."}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
-      <motion.button
-        onClick={onToggle}
-        layout
-        whileTap={{ scale: 0.97 }}
-        className="relative flex items-center gap-1 rounded-full border border-secondary/30 bg-background/90 p-1 shadow-sm"
-      >
-        {[
-          { key: "eat", label: "Eat", icon: <ForkIcon /> },
-          { key: "drink", label: "Drink", icon: <GlassIcon /> },
-        ].map((item) => {
-          const active = mode === item.key;
-
-          return (
-            <span
-              key={item.key}
-              className="relative flex items-center justify-center"
+        <div className="relative mx-auto h-44 w-full max-w-5xl overflow-visible sm:h-48 lg:h-60">
+          <AnimatePresence initial={false} mode="sync">
+            <motion.div
+              key={mode}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{
+                opacity: { duration: 0.2, ease: "linear" },
+                y: { duration: 0.36, ease: menuTextEase },
+              }}
+              className="absolute inset-x-0 top-0 space-y-4 will-change-transform"
             >
-              {active && (
-                <motion.span
-                  layoutId="menu-active-pill"
-                  className="absolute inset-0 rounded-full bg-secondary"
-                  transition={{
-                    type: "spring",
-                    stiffness: 420,
-                    damping: 34,
-                    mass: 0.8,
-                  }}
-                />
-              )}
-
-              <motion.span
-                animate={{
-                  color: active
-                    ? "var(--color-primary)"
-                    : "var(--color-secondary)",
-                  scale: active ? 1.03 : 1,
+              <motion.h2
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{
+                  opacity: { duration: 0.2, ease: "linear" },
+                  y: { duration: 0.32, ease: menuTextEase },
                 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="relative z-10 flex items-center gap-2 rounded-full px-5 py-3 text-sm lg:text-base"
+                className="px-2 font-edlavonia text-5xl leading-[1.08] tracking-wide sm:px-4 sm:text-6xl lg:text-8xl"
               >
-                {item.icon}
-                {item.label}
-              </motion.span>
-            </span>
-          );
-        })}
-      </motion.button>
+                {headerTitle}
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 0.8, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{
+                  opacity: { duration: 0.2, ease: "linear" },
+                  y: { duration: 0.34, ease: menuTextEase },
+                }}
+                className="mx-auto max-w-2xl text-sm font-light lg:text-lg"
+              >
+                {headerDescription}
+              </motion.p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      <div className="flex flex-col items-center gap-4">
+        <motion.button
+          onClick={onToggle}
+          whileTap={{ scale: 0.97 }}
+          className="relative flex items-center gap-1 rounded-full border border-secondary/30 bg-background/90 p-1 shadow-sm"
+        >
+          {[
+            { key: "eat", label: "Eat", icon: <ForkIcon /> },
+            { key: "drink", label: "Drink", icon: <GlassIcon /> },
+          ].map((item) => {
+            const active = mode === item.key;
+
+            return (
+              <span
+                key={item.key}
+                className="relative flex items-center justify-center"
+              >
+                {active && (
+                  <motion.span
+                    layoutId="menu-active-pill"
+                    className="absolute inset-0 rounded-full bg-secondary"
+                    transition={{
+                      type: "spring",
+                      stiffness: 420,
+                      damping: 34,
+                      mass: 0.8,
+                    }}
+                  />
+                )}
+
+                <motion.span
+                  animate={{
+                    color: active
+                      ? "var(--color-primary)"
+                      : "var(--color-secondary)",
+                    scale: active ? 1.03 : 1,
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="relative z-10 flex items-center gap-2 rounded-full px-5 py-3 text-sm lg:text-base"
+                >
+                  {item.icon}
+                  {item.label}
+                </motion.span>
+              </span>
+            );
+          })}
+        </motion.button>
+
+        <a
+          href="/menu-nadi.pdf"
+          download
+          className="border-b border-secondary/35 pb-1 text-xs font-light uppercase tracking-[0.28em] text-secondary/75 transition hover:border-secondary hover:text-secondary lg:text-sm"
+        >
+          Scarica il menu PDF
+        </a>
+      </div>
     </section>
   );
 };

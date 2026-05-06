@@ -43,7 +43,7 @@ const ctaVariants = {
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative h-[100dvh] overflow-hidden bg-black">
+    <section className="relative h-[100svh] overflow-hidden bg-black md:h-[100dvh]">
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.045 }}
@@ -80,7 +80,7 @@ export const Hero: React.FC = () => {
           variants={contentVariants}
           initial="hidden"
           animate="show"
-          className="relative z-10 flex h-[100dvh] flex-col items-center justify-around pt-[var(--header-height)] text-center text-white"
+          className="relative z-10 flex h-[100svh] flex-col items-center justify-around pt-[var(--header-height)] text-center text-white md:h-[100dvh]"
         >
           <h1 className="max-w-5xl text-4xl font-thin uppercase leading-tight tracking-[0.16em] sm:text-6xl md:text-7xl md:tracking-[0.18em] lg:text-8xl xl:text-9xl">
             <span className="block overflow-hidden pb-1">

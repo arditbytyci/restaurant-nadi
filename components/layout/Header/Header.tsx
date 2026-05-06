@@ -286,7 +286,6 @@ export const Header: React.FC = () => {
 
   const isRouteTransitionActive = routeTransitionState !== "idle";
   const shouldLockPage = isMenuOpen || isMenuClosing || isRouteTransitionActive;
-  const isHeaderMenuVisualActive = isMenuOpen || isRouteTransitionActive;
 
   // Scroll lock: keep this light for mobile Safari.
   useEffect(() => {
@@ -320,26 +319,12 @@ export const Header: React.FC = () => {
 
   const buttonText = isMenuOpen ? "close" : "open";
 
-  // Style differs between home (transparent overlay) and inner pages (solid cream)
-  const headerBg =
-    isHome && !isHeaderMenuVisualActive ? "bg-transparent" : "bg-primary";
-  const chromeColor = isHeaderMenuVisualActive
-    ? "text-secondary"
-    : isHome
-      ? "text-primary"
-      : "text-secondary";
-  const lightLogoOpacity = isHeaderMenuVisualActive
-    ? "opacity-0"
-    : isHome
-      ? "opacity-100"
-      : "opacity-0";
-  const darkLogoOpacity = isHeaderMenuVisualActive
-    ? "opacity-100"
-    : isHome
-      ? "opacity-0"
-      : "opacity-100";
-  const forkColor =
-    isHeaderMenuVisualActive || !isHome ? COLOR_SECONDARY : COLOR_PRIMARY;
+  // Keep the page header in page colors; the menu owns its own temporary chrome.
+  const headerBg = isHome ? "bg-transparent" : "bg-primary";
+  const chromeColor = isHome ? "text-primary" : "text-secondary";
+  const lightLogoOpacity = isHome ? "opacity-100" : "opacity-0";
+  const darkLogoOpacity = isHome ? "opacity-0" : "opacity-100";
+  const forkColor = isHome ? COLOR_PRIMARY : COLOR_SECONDARY;
 
   return (
     <>
@@ -405,7 +390,7 @@ export const Header: React.FC = () => {
 
       <AnimatePresence initial={false}>
         {isMenuOpen && (
-          <MenuModal onNavigate={navigateWithTransition} />
+          <MenuModal onClose={closeMenu} onNavigate={navigateWithTransition} />
         )}
       </AnimatePresence>
 

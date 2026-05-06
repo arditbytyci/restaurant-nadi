@@ -1,5 +1,5 @@
 import { Container } from "@/components/layout/Container";
-import { Clock, Instagram, Location } from "@/components/icons";
+import { Clock, Facebook, Instagram, Location } from "@/components/icons";
 
 const hours = [
   { day: "Lunedì", time: "12:00-15:00 / 18:30-23:00" },
@@ -109,15 +109,27 @@ export const Footer = () => {
               © Restaurant Nadi
             </p>
 
-            <a
-              href="https://www.instagram.com/nadisaporibalcanici?igsh=MXhqdzduMGJjdTZ5cA=="
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram Restaurant Nadi"
-              className="w-fit text-background/65 transition hover:text-background"
-            >
-              <Instagram color="currentColor" className="h-7 w-7" />
-            </a>
+            <div className="flex items-center gap-6">
+              <a
+                href="https://www.instagram.com/nadisaporibalcanici?igsh=MXhqdzduMGJjdTZ5cA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Restaurant Nadi"
+                className="text-background/65 transition hover:text-background"
+              >
+                <Instagram color="currentColor" className="h-10 w-10 sm:h-11 sm:w-11" />
+              </a>
+
+              <a
+                href="https://www.facebook.com/NadiSaporiBalcanici"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Restaurant Nadi"
+                className="text-background/65 transition hover:text-background"
+              >
+                <Facebook color="currentColor" className="h-10 w-10 sm:h-11 sm:w-11" />
+              </a>
+            </div>
 
             <p className="text-sm font-light">Roncade, Treviso - Italia</p>
           </div>

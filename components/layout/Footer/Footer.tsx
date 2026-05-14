@@ -47,7 +47,7 @@ export const Footer = () => {
                 </address>
 
                 <a
-                  href="https://maps.google.com/?q=45.639164,12.383047"
+                  href="https://maps.app.goo.gl/i98ktvW4XWdWJi5h9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-5 inline-flex w-fit border-b border-background/35 pb-1 text-sm uppercase tracking-[0.24em] text-background/70 transition hover:border-background hover:text-background"

@@ -66,7 +66,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({
       <Container className="absolute left-0 right-0 top-0 z-20 grid grid-cols-[1fr_1fr] bg-transparent py-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] lg:grid-cols-[1fr_1fr_1fr]">
         <div className="relative z-10 hidden items-center lg:col-start-1 lg:flex">
           <a
-            href="https://maps.app.goo.gl/i98ktvW4XWdWJi5h9"
+            href="https://maps.app.goo.gl/AY9WLevKiBHjpHhc8"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xl text-secondary transition-opacity hover:opacity-75"

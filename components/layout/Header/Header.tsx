@@ -335,7 +335,7 @@ export const Header: React.FC = () => {
         {/* Address: desktop only */}
         <div className="relative z-10 hidden items-center lg:col-start-1 lg:flex">
           <a
-            href="https://maps.app.goo.gl/i98ktvW4XWdWJi5h9"
+            href="https://maps.app.goo.gl/AY9WLevKiBHjpHhc8"
             target="_blank"
             rel="noopener noreferrer"
             className={`text-xl transition-opacity hover:opacity-75 ${chromeColor}`}

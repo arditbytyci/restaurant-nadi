@@ -64,7 +64,7 @@ export default function AboutPage() {
               </p>
 
               <a
-                href="https://maps.app.goo.gl/i98ktvW4XWdWJi5h9"
+                href="https://maps.app.goo.gl/AY9WLevKiBHjpHhc8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-fit border-b border-primary/45 pb-1 text-sm uppercase tracking-[0.24em] text-primary/80 transition hover:border-primary hover:text-primary"

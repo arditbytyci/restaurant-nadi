@@ -47,7 +47,7 @@ export const Footer = () => {
                 </address>
 
                 <a
-                  href="https://maps.app.goo.gl/AY9WLevKiBHjpHhc8"
+                  href="https://www.google.com/maps/place/Nadi+sapori+balcanici/@45.639164,12.3804721,17z/data=!4m6!3m5!1s0x47794f0005bc45f5:0x22db9f4166e156db!8m2!3d45.6391642!4d12.385622!16s%2Fg%2F11nj2bjzfc"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-5 inline-flex w-fit border-b border-background/35 pb-1 text-sm uppercase tracking-[0.24em] text-background/70 transition hover:border-background hover:text-background"

@@ -66,7 +66,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({
       <Container className="absolute left-0 right-0 top-0 z-20 grid grid-cols-[1fr_1fr] bg-transparent py-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] lg:grid-cols-[1fr_1fr_1fr]">
         <div className="relative z-10 hidden items-center lg:col-start-1 lg:flex">
           <a
-            href="https://maps.app.goo.gl/AY9WLevKiBHjpHhc8"
+            href="https://www.google.com/maps/place/Nadi+sapori+balcanici/@45.639164,12.3804721,17z/data=!4m6!3m5!1s0x47794f0005bc45f5:0x22db9f4166e156db!8m2!3d45.6391642!4d12.385622!16s%2Fg%2F11nj2bjzfc"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xl text-secondary transition-opacity hover:opacity-75"

@@ -335,7 +335,7 @@ export const Header: React.FC = () => {
         {/* Address: desktop only */}
         <div className="relative z-10 hidden items-center lg:col-start-1 lg:flex">
           <a
-            href="https://maps.app.goo.gl/AY9WLevKiBHjpHhc8"
+            href="https://www.google.com/maps/place/Nadi+sapori+balcanici/@45.639164,12.3804721,17z/data=!4m6!3m5!1s0x47794f0005bc45f5:0x22db9f4166e156db!8m2!3d45.6391642!4d12.385622!16s%2Fg%2F11nj2bjzfc"
             target="_blank"
             rel="noopener noreferrer"
             className={`text-xl transition-opacity hover:opacity-75 ${chromeColor}`}
